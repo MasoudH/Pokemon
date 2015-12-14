@@ -1,18 +1,18 @@
 // Masoud Harati
-// PokemonArt.java
+// Graphics.java
 // January 13, 2015
 
 import java.util.*;
 import java.io.*;
 
-public class txtDisplay {
-	// public static void main(String[] args) {
+public class Graphics {
+	public static void main(String[] args) {
 		// Scanner kb = new Scanner(System.in);
 		// String pokemonName = kb.nextLine();
-	// 	start();
-	// 	displayPokemon("pikachu");
-	// 	displayFinal(false);
-	// }
+		start();
+		displayPokemon("pikachu");
+		displayFinal(false);
+	}
 
 	public static void start() {
 		IO.clear();
