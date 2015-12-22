@@ -27,6 +27,7 @@ public class IO {
 			Thread.sleep(ms);
 		} catch (InterruptedException ex){
 			// Does nothing
+			System.err.println(ex.getMessage);
 		}
 	}
 
@@ -70,9 +71,12 @@ public class IO {
 		int num;
 
 		while(true) {
+			
 			try {
 				num = kb.nextInt();
-			} catch (InputMismatchException ex) {
+			} 
+
+			catch (InputMismatchException ex) {
 				kb.next();
 				System.out.println("That's not a number. Please try again!");
 				continue;
@@ -80,7 +84,9 @@ public class IO {
 
 			if (num > min && num < max) {
 				break;
-			} else {
+			} 
+
+			else {
 				System.out.println("That number is invalid. Please try again!");
 				continue;
 			}
@@ -90,39 +96,38 @@ public class IO {
 		return num;
 	}
 
-	public static void scrollPrintTextFast(String text) {
-		// Animated print function for printing text fast
+	public static void scrollPrint(String text, int charWait, int lineWait) {
+		// Animated print fucntion generic
 
 		for(char c : text.toCharArray()) {
 			System.out.print(c);
-			pause(7);
+			pause(charWait);
 		}
 
-		pause(100);
+		pause(lineWait);
 		System.out.println();
+
+	}
+
+	public static void scrollPrintTextFast(String text) {
+		// Animated print function for printing text fast
+
+		scrollPrint(text, 7, 100);
+
 	}
 
 	public static void scrollPrintTextSlow(String text) {
 		// Animated print function for printing text slowly
 
-		for(char c : text.toCharArray()) {
-			System.out.print(c);
-			pause(43);
-		}
+		scrollPrint(text, 43, 100);
 
-		pause(100);
-		System.out.println();
 	}
 
 	public static void scrollPrintArt(String text) {
 		// Animated print function for printing Pokemon ASCII Art
 
-		for(char c : text.toCharArray()) {
-			System.out.print(c);
-			pause(2);
-		}
+		scrollPrint(text, 2, 2);
 
-		pause(2);
-		System.out.println();
 	}
 }
+
