@@ -1,6 +1,8 @@
 // Masoud Harati
 // io.java
 // January 13, 2015
+// Basic Input and Output functions which allow text to be
+// displayed on the screen and recieving inputs.
 
 import java.util.*;
 import java.io.*;
