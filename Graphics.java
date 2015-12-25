@@ -7,15 +7,21 @@ import java.util.*;
 import java.io.*;
 
 public class Graphics {
+	// Handles the main components of the text based graphics of
+	// of the game.
+
 	public static void main(String[] args) {
 		// Scanner kb = new Scanner(System.in);
 		// String pokemonName = kb.nextLine();
 		start();
-		displayPokemon("pikachu");
-		displayFinal(false);
+		// displayPokemon("pikachu");
+		// displayFinal(false);
 	}
 
 	public static void start() {
+		// Displays a text based version of the Pokemon logo
+		// and the creator of the game (Masoud Harati).
+
 		IO.clear();
 		display("logo");
 		IO.pause(500);
@@ -25,6 +31,8 @@ public class Graphics {
 	}
 
 	public static void displayPokemon(String name) {
+		// Displays a text based version of the pokemon.
+
 		IO.clear();
 		IO.pause(500);
 		display(name);
@@ -32,6 +40,9 @@ public class Graphics {
 	}
 	
 	public static void displayFinal(boolean won) {
+		// Displays a text based version of "You Win!" or
+		// "Game Over." depending on the outcome of the game.
+
 		IO.clear();
 		if (won) {
 			display("win");
@@ -43,7 +54,7 @@ public class Graphics {
 	}
 
 	public static void display(String name) {
-		// Displays the ASCII art of the Pokemon
+		// Displays an ASCII version of the Pokemon.
 
 		try {
 			name = name.toLowerCase();

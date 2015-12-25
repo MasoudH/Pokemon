@@ -29,7 +29,7 @@ public class IO {
 			Thread.sleep(ms);
 		} catch (InterruptedException ex){
 			// Does nothing
-			System.err.println(ex.getMessage);
+			System.err.println(ex.getMessage());
 		}
 	}
 
@@ -58,7 +58,7 @@ public class IO {
 			System.err.println(ex.getMessage());
 		}
 		catch(InterruptedException ex){
-			// Error Message is displayed
+			// Error Messaged is displayed
 
 			System.out.println("Unable to clear window. Windows Based");
 			System.err.println(ex.getMessage());
