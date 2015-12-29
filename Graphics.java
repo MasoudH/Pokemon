@@ -21,7 +21,9 @@ public class Graphics {
 	public static void start() {
 		// Displays a text based version of the Pokemon logo
 		// and the creator of the game (Masoud Harati).
-
+		IO.clear();
+		System.out.println("Please Enter Full Screen mode in Terminal/CMD window for best results.");
+		IO.pause(2000);
 		IO.clear();
 		display("logo");
 		IO.pause(500);
