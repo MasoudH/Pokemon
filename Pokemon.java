@@ -17,6 +17,8 @@ public class Pokemon {
 	private int numOfAttacks;
 
 	public Pokemon(String dataLine) {
+		// Constructor Method
+
 		String[] inArray = dataLine.split(",");
 		name = inArray[0];
 		hp = Integer.parseInt(inArray[1]);
@@ -26,25 +28,33 @@ public class Pokemon {
 		weakness = inArray[4];
 	}
 
-
-	// Start of Getter Methods for the Pokemon Class
 	public String getName() {
+		// Getter method for the pokemons name
+
 		return name;
 	}
 
 	public int getHP() {
+		// Getter method for the pokemons hp
+		
 		return hp;
 	}
 
 	public int getEnergy() {
+		// Getter method for the pokemons energy
+
 		return energy;
 	}
 
 	public String getType() {
+		// Getter method for the pokemons type
+
 		return type;
 	}
 
 	public String getResistance() {
+		// Getter method for the pokemons resistance
+
 		if (resistance.equals(" ")) {
 			return "None";
 		}
@@ -54,6 +64,8 @@ public class Pokemon {
 	}
 
 	public String getWeakness() {
+		// Getter method for the pokemons weakness
+
 		if (weakness.equals(" ")) {
 			return "None";
 		} else {
@@ -61,16 +73,16 @@ public class Pokemon {
 		}
 	}
 
-	public int getNumOfAttacks() {
-		return numOfAttacks;
-	}
-
 	public boolean getIsDisabled() {
+		// Getter method for the disabled boolean of the pokemon
+
 		return disabled;
 	}
 
 	public boolean getIsStunned() {
+		// Getter method for the stunned boolean of the pokemon
+
 		return stunned;
 	}
-	// End of Getter Methods
+
 }

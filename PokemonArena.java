@@ -13,10 +13,10 @@ public class PokemonArena {
 	private static ArrayList<Pokemon> usersPokemons = new ArrayList<Pokemon>();
 
 	public static void main(String[] args) {
-		Graphics.start();
+		// Graphics.start();
 		loadPokemons();
 		choose4();
-		Graphics.displayFinal(true);
+		// Graphics.displayFinal(true);
 		// displayStatistics(pokedex.get(6));
 	}
 
@@ -47,7 +47,7 @@ public class PokemonArena {
 			System.out.println();
 
 			for(int i = 1; i <= pokedex.size(); i++) {
-				System.out.printf("\t%d) %s\n", i, pokedex.get(i-1).getName());
+				System.out.printf("\t%d - %s\n", i, pokedex.get(i-1).getName());
 				IO.pause(10);
 			}
 
@@ -97,6 +97,7 @@ public class PokemonArena {
 			}
 
 			if (choicesLeft == 0) {
+				enemiesPokemons = pokedex; // Adds the rest of the pokemons to the enemies group.
 				whileLoopFlag = false; // Ends loop when there are no choices left.
 			}
 		}
