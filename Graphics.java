@@ -10,14 +10,6 @@ public class Graphics {
 	// Handles the main components of the text based graphics of
 	// of the game.
 
-	public static void main(String[] args) {
-		// Scanner kb = new Scanner(System.in);
-		// String pokemonName = kb.nextLine();
-		start();
-		// displayPokemon("pikachu");
-		// displayFinal(false);
-	}
-
 	public static void start() {
 		// Displays a text based version of the Pokemon logo
 		// and the creator of the game (Masoud Harati).
@@ -30,15 +22,18 @@ public class Graphics {
 		IO.clear();
 		display("masoud");
 		IO.pause(500);
+		IO.clear();
 	}
 
-	public static void displayPokemon(String name) {
+	public static void displayPokemon(String name, boolean clear) {
 		// Displays a text based version of the pokemon.
+		if (clear) {
+			IO.clear();
+		}
 
-		IO.clear();
-		IO.pause(500);
+		IO.pause(100);
 		display(name);
-		IO.pause(500);
+		IO.pause(100);
 	}
 	
 	public static void displayFinal(boolean won) {
