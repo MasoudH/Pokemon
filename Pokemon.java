@@ -31,27 +31,44 @@ public class Pokemon {
 	public String getName() {
 		return name;
 	}
+
 	public int getHP() {
 		return hp;
 	}
+
 	public int getEnergy() {
 		return energy;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public String getResistance() {
-		return resistance;
+		if (resistance.equals(" ")) {
+			return "None";
+		}
+		else {
+			return resistance;
+		}
 	}
+
 	public String getWeakness() {
-		return weakness;
+		if (weakness.equals(" ")) {
+			return "None";
+		} else {
+			return weakness;
+		}
 	}
+
 	public int getNumOfAttacks() {
 		return numOfAttacks;
 	}
+
 	public boolean getIsDisabled() {
 		return disabled;
 	}
+
 	public boolean getIsStunned() {
 		return stunned;
 	}

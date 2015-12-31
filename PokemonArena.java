@@ -16,8 +16,10 @@ public class PokemonArena {
 		Graphics.start();
 		loadPokemons();
 		choose4();
+		Graphics.displayFinal(true);
+		// displayStatistics(pokedex.get(6));
 	}
-	
+
 	private static void choose4() {
 		// Allows the user to chose the 4 pokemons of their choice by entering
 		// the pokemons corresponding number
@@ -64,6 +66,8 @@ public class PokemonArena {
 				IO.clear();
 				System.out.printf("You chose %s.\n", pokedex.get(selection-1).getName());
 				Graphics.displayPokemon(pokedex.get(selection-1).getName(), false);
+				displayStatistics(pokedex.get(selection-1));
+				System.out.println();
 
 				IO.scrollPrintTextSlow("Would you like to add ", false);
 				System.out.print(pokedex.get(selection-1).getName());
@@ -85,7 +89,7 @@ public class PokemonArena {
 					IO.scrollPrintTextSlow("Please chose another pokemon.", true);
 				}
 				else {
-					IO.scrollPrintTextSlow("That is not a valid choice. Please enter a valid variable.", true);
+					IO.scrollPrintTextSlow("That is not a valid choice. Please enter a valid number.", true);
 				}
 			}
 			else {
@@ -96,6 +100,30 @@ public class PokemonArena {
 				whileLoopFlag = false; // Ends loop when there are no choices left.
 			}
 		}
+	}
+
+	private static void displayStatistics(Pokemon pokemon) {
+		// Displays the Pokemons main statistics
+
+		System.out.print("\t");
+		IO.scrollPrintTextSlow("HP: ", false);
+		System.out.print(pokemon.getHP()+"\n");
+
+		System.out.print("\t");
+		IO.scrollPrintTextSlow("Energy: ", false);
+		System.out.print(pokemon.getEnergy()+"\n");
+
+		System.out.print("\t");
+		IO.scrollPrintTextSlow("Type: ", false);
+		System.out.print(pokemon.getType().substring(0, 1).toUpperCase() + pokemon.getType().substring(1)+"\n");
+
+		System.out.print("\t");
+		IO.scrollPrintTextSlow("Resistance: ", false);
+		System.out.print(pokemon.getResistance().substring(0, 1).toUpperCase() + pokemon.getResistance().substring(1)+"\n");
+
+		System.out.print("\t");
+		IO.scrollPrintTextSlow("Weakness: ", false);
+		System.out.print(pokemon.getWeakness().substring(0, 1).toUpperCase() + pokemon.getWeakness().substring(1)+"\n");
 	}
 
 	private static void loadPokemons() {
