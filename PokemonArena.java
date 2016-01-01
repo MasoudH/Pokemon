@@ -20,6 +20,27 @@ public class PokemonArena {
 		// displayStatistics(pokedex.get(6));
 	}
 
+	private static void loadPokemons() {
+		// Reads pokemon.txt, and stores the data in the pokedex arraylist
+
+		Scanner inFile = null;
+
+		try {
+			inFile = new Scanner(new File("pokemon.txt"));
+		}
+		catch(IOException ex) {
+			System.out.println(ex);
+		}
+
+		int numLine;
+		numLine = Integer.parseInt(inFile.nextLine());
+
+		for(int i = 0; i < numLine; i++) {
+			String line = inFile.nextLine();
+			pokedex.add(new Pokemon(line));
+		}
+	}
+
 	private static void choose4() {
 		// Allows the user to chose the 4 pokemons of their choice by entering
 		// the pokemons corresponding number
@@ -125,26 +146,5 @@ public class PokemonArena {
 		System.out.print("\t");
 		IO.scrollPrintTextSlow("Weakness: ", false);
 		System.out.print(pokemon.getWeakness().substring(0, 1).toUpperCase() + pokemon.getWeakness().substring(1)+"\n");
-	}
-
-	private static void loadPokemons() {
-		// Reads pokemon.txt, and stores the data in the pokedex arraylist
-
-		Scanner inFile = null;
-
-		try {
-			inFile = new Scanner(new File("pokemon.txt"));
-		}
-		catch(IOException ex) {
-			System.out.println(ex);
-		}
-
-		int numLine;
-		numLine = Integer.parseInt(inFile.nextLine());
-
-		for(int i = 0; i < numLine; i++) {
-			String line = inFile.nextLine();
-			pokedex.add(new Pokemon(line));
-		}
 	}
 }
