@@ -1,6 +1,6 @@
 // Masoud Harati
 // PokemonArena.java
-// January 13, 2015
+// January 13, 2016
 // Contains the main method. Also, includes the main layout of the game.
 
 import java.util.*;

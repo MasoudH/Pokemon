@@ -1,6 +1,6 @@
 // Masoud Harati
 // Pokemon.java
-// January 13, 2015
+// January 13, 2016
 
 import java.util.*;
 import java.io.*;
@@ -9,12 +9,11 @@ public class Pokemon {
 	// Class for Pokemon Moves
 
 	private String name, resistance, weakness, type;
-	private int hp, startHP;
+	private int hp, startHP, numOfAttacks;
 	private int energy = 50;
-	private ArrayList<String> attacks = new ArrayList<String>();
+	private ArrayList<Attack> attacks = new ArrayList<Attack>();
 	private boolean disabled = false;
 	private boolean stunned = false;
-	private int numOfAttacks;
 
 	public Pokemon(String dataLine) {
 		// Constructor Method
@@ -26,6 +25,12 @@ public class Pokemon {
 		type = inArray[2];
 		resistance = inArray[3];
 		weakness = inArray[4];
+		numOfAttacks = Integer.parseInt(inArray[5]);
+
+		for(int i = 0; i < numOfAttacks; i++) {
+			// Adding the pokemons attack attributes to the attacks arraylist
+			attacks.add(new Attack(inArray[4*i+6], Integer.parseInt(inArray[4*i+7]), Integer.parseInt(inArray[4*i+8]), inArray[4*i+9]));
+		}
 	}
 
 	public String getName() {
@@ -36,7 +41,7 @@ public class Pokemon {
 
 	public int getHP() {
 		// Getter method for the pokemons hp
-		
+
 		return hp;
 	}
 
@@ -84,5 +89,24 @@ public class Pokemon {
 
 		return stunned;
 	}
+
+	public int getNumOfAttacks() {
+		// Getter method for the number of different attacks a pokemon has
+
+		return numOfAttacks;
+	}
+
+	public void displayAttacks(int numOfTabs) {
+		// Displays the Pokemons different attacks
+
+	} 
+
+
+
+
+
+
+
+
 
 }

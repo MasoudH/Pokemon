@@ -1,6 +1,6 @@
 // Masoud Harati
 // Attack.java
-// January 13, 2015
+// January 13, 2016
 
 import java.util.*;
 import java.io.*;
@@ -9,12 +9,12 @@ public class Attack {
 	private int cost, damage;
 	private String name, special;
 
-	public Attack(String name, String cost, String damage, String special) {
+	public Attack(String name, int cost, int damage, String special) {
 		// Constructor method for the Attack class
 
 		this.name = name;
-		this.cost = Integer.parseInt(cost);
-		this.damage = Integer.parseInt(damage);
+		this.cost = cost;
+		this.damage = damage;
 		this.special = special;
 	}
 
