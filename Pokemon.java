@@ -96,9 +96,26 @@ public class Pokemon {
 		return numOfAttacks;
 	}
 
-	public void displayAttacks(int numOfTabs) {
+	public void displayAttacks() {
 		// Displays the Pokemons different attacks
 
+		for(int i = 0; i < attacks.size(); i++) {
+			System.out.print("\t\t- ");
+			IO.scrollPrintTextSlow("Name of Attack: ", false);
+			System.out.print(attacks.get(i).getAttackName()+"\n");
+
+			System.out.print("\t\t\t- ");
+			IO.scrollPrintTextSlow("Cost of Attack: ", false);
+			System.out.print(attacks.get(i).getAttackCost()+"\n");
+
+			System.out.print("\t\t\t- ");
+			IO.scrollPrintTextSlow("Damage of Attack: ", false);
+			System.out.print(attacks.get(i).getAttackDamage()+"\n");
+
+			System.out.print("\t\t\t- ");
+			IO.scrollPrintTextSlow("Special Type: ", false);
+			System.out.print(attacks.get(i).getSpecialType().substring(0, 1).toUpperCase()+attacks.get(i).getSpecialType().substring(1)+"\n");
+		}
 	} 
 
 

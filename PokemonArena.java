@@ -13,11 +13,10 @@ public class PokemonArena {
 	private static ArrayList<Pokemon> usersPokemons = new ArrayList<Pokemon>();
 
 	public static void main(String[] args) {
-		// Graphics.start();
+		Graphics.start();
 		loadPokemons();
 		choose4();
-		// Graphics.displayFinal(true);
-		// displayStatistics(pokedex.get(6));
+		Graphics.displayFinal(true);
 	}
 
 	private static void loadPokemons() {
@@ -81,6 +80,8 @@ public class PokemonArena {
 			}
 			catch(InputMismatchException ex) {
 				System.out.println("Please enter an integer.");
+				kb.next();
+				selection = 0;
 			}
 
 			if (selection >= 1 && selection <= pokedex.size()) {
@@ -99,6 +100,8 @@ public class PokemonArena {
 				}
 				catch(InputMismatchException ex) {
 					System.out.println("Please enter an integer.");
+					kb.next();
+					selection = 0;
 				}
 
 				if(choice == 1) {
@@ -127,24 +130,30 @@ public class PokemonArena {
 	private static void displayStatistics(Pokemon pokemon) {
 		// Displays the Pokemons main statistics
 
-		System.out.print("\t");
+		System.out.print("\t- ");
 		IO.scrollPrintTextSlow("HP: ", false);
 		System.out.print(pokemon.getHP()+"\n");
 
-		System.out.print("\t");
+		System.out.print("\t- ");
 		IO.scrollPrintTextSlow("Energy: ", false);
 		System.out.print(pokemon.getEnergy()+"\n");
 
-		System.out.print("\t");
+		System.out.print("\t- ");
 		IO.scrollPrintTextSlow("Type: ", false);
 		System.out.print(pokemon.getType().substring(0, 1).toUpperCase() + pokemon.getType().substring(1)+"\n");
 
-		System.out.print("\t");
+		System.out.print("\t- ");
 		IO.scrollPrintTextSlow("Resistance: ", false);
 		System.out.print(pokemon.getResistance().substring(0, 1).toUpperCase() + pokemon.getResistance().substring(1)+"\n");
 
-		System.out.print("\t");
+		System.out.print("\t- ");
 		IO.scrollPrintTextSlow("Weakness: ", false);
 		System.out.print(pokemon.getWeakness().substring(0, 1).toUpperCase() + pokemon.getWeakness().substring(1)+"\n");
+
+		System.out.print("\t- ");
+		IO.scrollPrintTextSlow("Number of Attacks: ", false);
+		System.out.print(pokemon.getNumOfAttacks()+"\n");
+
+		pokemon.displayAttacks();
 	}
 }
