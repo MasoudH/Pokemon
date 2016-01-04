@@ -66,7 +66,7 @@ public class IO {
 		pause(lineWait);
 	}
 
-	public static void scrollPrintTextSlow(String text, boolean printExtraLine) {
+	public static void scrollPrintText(String text, boolean printExtraLine) {
 		// Animated print function for printing text slowly
 
 		scrollPrint(text, 30, 100);

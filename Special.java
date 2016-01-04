@@ -18,12 +18,12 @@ public class Special {
 		int randomNum = rand.nextInt(2);
 
 		if(randomNum == 0) {
-			IO.scrollPrintTextSlow(" used stun and was successful. ", false);
+			IO.scrollPrintText(" used stun and was successful. ", false);
 			System.out.print(enemy.getName()+"\n");
 			// enemy.stun();
 		}
 		else {
-			IO.scrollPrintTextSlow(" used stun and was unsuccessful.\n", false);
+			IO.scrollPrintText(" used stun and was unsuccessful.\n", false);
 		}
 	}
 
@@ -37,10 +37,10 @@ public class Special {
 		int randomNum = rand.nextInt(2);
 
 		if(randomNum == 0) {
-			IO.scrollPrintTextSlow(" used a wild card and the damage was SUCCESSFUL.", false);
+			IO.scrollPrintText(" used a wild card and the damage was SUCCESSFUL.", false);
 		}
 		else {
-			IO.scrollPrintTextSlow(" used a wild card and the damage was UNSUCCESSFUL", false);
+			IO.scrollPrintText(" used a wild card and the damage was UNSUCCESSFUL", false);
 		}
 	}
 
@@ -48,7 +48,7 @@ public class Special {
 		int count = 0;
 
 		System.out.print(friendly.getName());
-		IO.scrollPrintTextSlow(" used wild storm. The damage was increased by ", false);
+		IO.scrollPrintText(" used wild storm. The damage was increased by ", false);
 
 		Random rand = new Random();
 		int randomNum = rand.nextInt(2);
@@ -70,6 +70,6 @@ public class Special {
 		}
 
 		System.out.print(count);
-		IO.scrollPrintTextSlow("times.", false);
+		IO.scrollPrintText("times.", false);
 	}
 }

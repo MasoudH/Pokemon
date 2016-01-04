@@ -121,19 +121,19 @@ public class Pokemon {
 
 		for(int i = 0; i < attacks.size(); i++) {
 			System.out.print("\t\t- ");
-			IO.scrollPrintTextSlow("Name of Attack: ", false);
+			IO.scrollPrintText("Name of Attack: ", false);
 			System.out.print(attacks.get(i).getAttackName()+"\n");
 
 			System.out.print("\t\t\t- ");
-			IO.scrollPrintTextSlow("Cost of Attack: ", false);
+			IO.scrollPrintText("Cost of Attack: ", false);
 			System.out.print(attacks.get(i).getAttackCost()+"\n");
 
 			System.out.print("\t\t\t- ");
-			IO.scrollPrintTextSlow("Damage of Attack: ", false);
+			IO.scrollPrintText("Damage of Attack: ", false);
 			System.out.print(attacks.get(i).getAttackDamage()+"\n");
 
 			System.out.print("\t\t\t- ");
-			IO.scrollPrintTextSlow("Special Type: ", false);
+			IO.scrollPrintText("Special Type: ", false);
 			System.out.print(attacks.get(i).getSpecialType().substring(0, 1).toUpperCase()+attacks.get(i).getSpecialType().substring(1)+"\n");
 		}
 	}

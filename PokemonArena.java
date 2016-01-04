@@ -66,16 +66,16 @@ public class PokemonArena {
 
 
 		// Start of Introduction
-		IO.scrollPrintTextSlow("Welcome to the Arena, Trainer.", true);
-		IO.scrollPrintTextSlow("You may chose 4 pokemons from my Pokedex to battle the rest.", true);
+		IO.scrollPrintText("Welcome to the Arena, Trainer.", true);
+		IO.scrollPrintText("You may chose 4 pokemons from my Pokedex to battle the rest.", true);
 		// End of Introduction
 
 
 		while(whileLoopFlag) {
 			IO.clear();
-			IO.scrollPrintTextSlow("You may chose ", false);
+			IO.scrollPrintText("You may chose ", false);
 			System.out.print(choicesLeft);
-			IO.scrollPrintTextSlow(" Pokemons out of the following ", false);
+			IO.scrollPrintText(" Pokemons out of the following ", false);
 			System.out.print(pokedex.size() + ":");
 			System.out.println();
 
@@ -84,9 +84,9 @@ public class PokemonArena {
 				IO.pause(10);
 			}
 
-			IO.scrollPrintTextSlow("Enter the corresponding number to the Pokemon you want. There are ", false);
+			IO.scrollPrintText("Enter the corresponding number to the Pokemon you want. There are ", false);
 			System.out.print(choicesLeft);
-			IO.scrollPrintTextSlow(" remaining.", true);
+			IO.scrollPrintText(" remaining.", true);
 
 			try {
 				selection = kb.nextInt();
@@ -100,13 +100,13 @@ public class PokemonArena {
 			if (selection >= 1 && selection <= pokedex.size()) {
 				IO.clear();
 				System.out.printf("You chose %s.\n", pokedex.get(selection-1).getName());
-				// Graphics.displayPokemon(pokedex.get(selection-1).getName(), false);
-				// displayStatistics(pokedex.get(selection-1));
+				Graphics.displayPokemon(pokedex.get(selection-1).getName(), false);
+				displayStatistics(pokedex.get(selection-1));
 				System.out.println();
 
-				IO.scrollPrintTextSlow("Would you like to add ", false);
+				IO.scrollPrintText("Would you like to add ", false);
 				System.out.print(pokedex.get(selection-1).getName());
-				IO.scrollPrintTextSlow(" to your group [1 - Yes / 2 - No]: ", false);
+				IO.scrollPrintText(" to your group [1 - Yes / 2 - No]: ", false);
 
 				try {
 					choice = kb.nextInt();
@@ -123,14 +123,14 @@ public class PokemonArena {
 					pokedex.remove(pokedex.get(selection-1));
 				}
 				else if(choice == 2) {
-					IO.scrollPrintTextSlow("Please chose another pokemon.", true);
+					IO.scrollPrintText("Please chose another pokemon.", true);
 				}
 				else {
-					IO.scrollPrintTextSlow("That is not a valid choice. Please enter a valid number.", true);
+					IO.scrollPrintText("That is not a valid choice. Please enter a valid number.", true);
 				}
 			}
 			else {
-				IO.scrollPrintTextSlow("That is not a valid choice. Please enter a valid number.", true);
+				IO.scrollPrintText("That is not a valid choice. Please enter a valid number.", true);
 			}
 
 			if (choicesLeft == 0) {
@@ -144,27 +144,27 @@ public class PokemonArena {
 		// Displays the Pokemons main statistics
 
 		System.out.print("\t- ");
-		IO.scrollPrintTextSlow("HP: ", false);
+		IO.scrollPrintText("HP: ", false);
 		System.out.print(pokemon.getHP()+"\n");
 
 		System.out.print("\t- ");
-		IO.scrollPrintTextSlow("Energy: ", false);
+		IO.scrollPrintText("Energy: ", false);
 		System.out.print(pokemon.getEnergy()+"\n");
 
 		System.out.print("\t- ");
-		IO.scrollPrintTextSlow("Type: ", false);
+		IO.scrollPrintText("Type: ", false);
 		System.out.print(pokemon.getType().substring(0, 1).toUpperCase() + pokemon.getType().substring(1)+"\n");
 
 		System.out.print("\t- ");
-		IO.scrollPrintTextSlow("Resistance: ", false);
+		IO.scrollPrintText("Resistance: ", false);
 		System.out.print(pokemon.getResistance().substring(0, 1).toUpperCase() + pokemon.getResistance().substring(1)+"\n");
 
 		System.out.print("\t- ");
-		IO.scrollPrintTextSlow("Weakness: ", false);
+		IO.scrollPrintText("Weakness: ", false);
 		System.out.print(pokemon.getWeakness().substring(0, 1).toUpperCase() + pokemon.getWeakness().substring(1)+"\n");
 
 		System.out.print("\t- ");
-		IO.scrollPrintTextSlow("Number of Attacks: ", false);
+		IO.scrollPrintText("Number of Attacks: ", false);
 		System.out.print(pokemon.getNumOfAttacks()+"\n");
 
 		pokemon.displayAttacks();
@@ -176,16 +176,28 @@ public class PokemonArena {
 		Scanner kb = new Scanner(System.in);
 
 		IO.clear();
-		IO.scrollPrintTextSlow("Your group of pokemons consists of:\n", false);
+		IO.scrollPrintText("Your group of pokemons consists of:\n", false);
 
 		for(int i = 1; i <= usersPokemons.size(); i++) {
 			System.out.print("\t"+i);
-			IO.scrollPrintTextSlow(" - ", false);
+			IO.scrollPrintText(" - ", false);
 			System.out.print(usersPokemons.get(i-1).getName()+ " (");
-			System.out.print(usersPokemons.get(i-1).findNumPossibleAttacks()+" attacks available)\n");
+			System.out.print(usersPokemons.get(i-1).findNumPossibleAttacks()+" attacks available, ");
+
+			if(usersPokemons.get(i-1).getHP() > 10) {
+				IO.scrollPrintText("Active)", false);
+			}
+			else if(usersPokemons.get(i-1).getHP() <= 10) {
+				IO.scrollPrintText("HP low)", false);
+			}
+			else {
+				IO.scrollPrintText("KO)", false);
+			}
+
+			System.out.println();
 		}
 
-		IO.scrollPrintTextSlow("Which Pokemon would you like to use to battle? ", false);
+		IO.scrollPrintText("Which Pokemon would you like to use to battle? ", false);
 
 		int selection = 5;
 		boolean whileLoopFlag = true;
@@ -206,7 +218,7 @@ public class PokemonArena {
 				whileLoopFlag = false;
 			}
 			else {
-				IO.scrollPrintTextSlow("Sorry, that isn't a valid Pokemon.\n", false);
+				IO.scrollPrintText("Sorry, that isn't a valid Pokemon.\n", false);
 			}
 		}
 	}
@@ -223,6 +235,8 @@ public class PokemonArena {
 
 	private static void testing() {
 		// Erase at the end
+
+		IO.clear();
 
 		// Used for testing
 		usersPokemons.add(pokedex.get(0));
