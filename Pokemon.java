@@ -118,12 +118,27 @@ public class Pokemon {
 		}
 	} 
 
+	public void stun() {
+		// Changes the value of the pokemon to stunned
 
+		stunned = true;
+	}
 
+	public void unstun() {
+		// Changes the value of the pokemon to not stunned
 
+		stunned = false;
+	}
 
+	public void disable() {
+		// Changes the value of the pokemon to disabled
 
+		disabled = true;
+	}
 
+	public void undisable() {
+		// Changes the value of the pokemon to not disabled
 
-
+		disabled = false;
+	}
 }

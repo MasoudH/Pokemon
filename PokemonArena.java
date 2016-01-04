@@ -13,10 +13,12 @@ public class PokemonArena {
 	private static ArrayList<Pokemon> usersPokemons = new ArrayList<Pokemon>();
 
 	public static void main(String[] args) {
-		Graphics.start();
+		// Graphics.start();
 		loadPokemons();
-		choose4();
-		Graphics.displayFinal(true);
+		// choose4();
+		testing();
+		chosePokemon();
+		// Graphics.displayFinal(true);
 	}
 
 	private static void loadPokemons() {
@@ -87,8 +89,8 @@ public class PokemonArena {
 			if (selection >= 1 && selection <= pokedex.size()) {
 				IO.clear();
 				System.out.printf("You chose %s.\n", pokedex.get(selection-1).getName());
-				Graphics.displayPokemon(pokedex.get(selection-1).getName(), false);
-				displayStatistics(pokedex.get(selection-1));
+				// Graphics.displayPokemon(pokedex.get(selection-1).getName(), false);
+				// displayStatistics(pokedex.get(selection-1));
 				System.out.println();
 
 				IO.scrollPrintTextSlow("Would you like to add ", false);
@@ -155,5 +157,39 @@ public class PokemonArena {
 		System.out.print(pokemon.getNumOfAttacks()+"\n");
 
 		pokemon.displayAttacks();
+	}
+
+	private static void chosePokemon() {
+		// Allows the player to chose which pokemon they would like to use.
+
+		Scanner kb = new Scanner(System.in);
+
+		IO.clear();
+		IO.scrollPrintTextSlow("Your group of pokemons consists of:\n", false);
+
+		for(int i = 1; i <= usersPokemons.size(); i++) {
+			System.out.print("\t"+i);
+			IO.scrollPrintTextSlow(" - ", false);
+			System.out.print(usersPokemons.get(i-1).getName()+"\n");
+		}
+
+		IO.scrollPrintTextSlow("Which Pokemon woudl you like to use to battle? ");
+	}
+
+	private static void testing() {
+
+		// Used for testing
+		usersPokemons.add(pokedex.get(0));
+		usersPokemons.add(pokedex.get(1));
+		usersPokemons.add(pokedex.get(2));
+		usersPokemons.add(pokedex.get(3));
+
+		for(int i = 0; i < 4; i++) {
+			pokedex.remove(pokedex.get(0));
+		}
+
+		enemiesPokemons = pokedex;
+		// End of testing stage
+
 	}
 }

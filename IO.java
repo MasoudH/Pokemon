@@ -66,17 +66,6 @@ public class IO {
 		pause(lineWait);
 	}
 
-	public static void scrollPrintTextFast(String text, boolean printExtraLine) {
-		// Animated print function for printing text fast
-
-		scrollPrint(text, 7, 100);
-
-		if (printExtraLine) {
-			System.out.println();
-		}
-
-	}
-
 	public static void scrollPrintTextSlow(String text, boolean printExtraLine) {
 		// Animated print function for printing text slowly
 
