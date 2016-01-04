@@ -51,6 +51,12 @@ public class Pokemon {
 		return energy;
 	}
 
+	public ArrayList<Attack> getAttacks() {
+		// Getter method for the pokemons attacks
+
+		return attacks;
+	}
+
 	public String getType() {
 		// Getter method for the pokemons type
 
@@ -96,6 +102,20 @@ public class Pokemon {
 		return numOfAttacks;
 	}
 
+	public int findNumPossibleAttacks() {
+		// Returns the number of possible attacks for a certain Pokemon
+		// The Pokemons energy must be higher or equal to the cost of the attack
+
+		int posAttackNum = 0;
+		for(int i = 0; i < numOfAttacks; i++) {
+			if(attacks.get(i).getAttackCost() <= energy) {
+				posAttackNum++;
+			}
+		}
+
+		return posAttackNum;
+	}
+
 	public void displayAttacks() {
 		// Displays the Pokemons different attacks
 
@@ -116,7 +136,7 @@ public class Pokemon {
 			IO.scrollPrintTextSlow("Special Type: ", false);
 			System.out.print(attacks.get(i).getSpecialType().substring(0, 1).toUpperCase()+attacks.get(i).getSpecialType().substring(1)+"\n");
 		}
-	} 
+	}
 
 	public void stun() {
 		// Changes the value of the pokemon to stunned

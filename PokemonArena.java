@@ -3,14 +3,25 @@
 // January 13, 2016
 // Contains the main method. Also, includes the main layout of the game.
 
+/*
+to-do:
+	- Add special attack (Special.java)
+	- get number of attacks available to chose from (Pokemon.java)
+	- Give the user their options to for moves (PokemonArena.java)
+	- Battle Phase (PokemonArena.java)
+	- Winner (PokemonArena.java)
+	- Fix Move (PokemonArena.java)
+*/
+
 import java.util.*;
 import java.io.*;
 
 public class PokemonArena {
 
-	private static ArrayList<Pokemon> pokedex = new ArrayList<Pokemon>();
-	private static ArrayList<Pokemon> enemiesPokemons = new ArrayList<Pokemon>();
-	private static ArrayList<Pokemon> usersPokemons = new ArrayList<Pokemon>();
+	private static int usersCurrentPokemon;
+	private static ArrayList<Pokemon> pokedex = new ArrayList<Pokemon>(); // Arraylist containing all pokemons
+	private static ArrayList<Pokemon> enemiesPokemons = new ArrayList<Pokemon>(); // Arraylist containing users pokemons
+	private static ArrayList<Pokemon> usersPokemons = new ArrayList<Pokemon>(); // Arraylist containg enemy's pokemons
 
 	public static void main(String[] args) {
 		// Graphics.start();
@@ -170,13 +181,48 @@ public class PokemonArena {
 		for(int i = 1; i <= usersPokemons.size(); i++) {
 			System.out.print("\t"+i);
 			IO.scrollPrintTextSlow(" - ", false);
-			System.out.print(usersPokemons.get(i-1).getName()+"\n");
+			System.out.print(usersPokemons.get(i-1).getName()+ " (");
+			System.out.print(usersPokemons.get(i-1).findNumPossibleAttacks()+" attacks available)\n");
 		}
 
-		IO.scrollPrintTextSlow("Which Pokemon woudl you like to use to battle? ");
+		IO.scrollPrintTextSlow("Which Pokemon would you like to use to battle? ", false);
+
+		int selection = 5;
+		boolean whileLoopFlag = true;
+
+		while(whileLoopFlag) {
+
+			try {
+				selection = kb.nextInt();
+			}
+			catch(InputMismatchException ex) {
+				System.out.println("Please enter an Integer.");
+				selection = 5;
+				kb.next();
+			}
+
+			if(selection <= usersPokemons.size() && selection >= 0) {
+				usersCurrentPokemon = selection-1;
+				whileLoopFlag = false;
+			}
+			else {
+				IO.scrollPrintTextSlow("Sorry, that isn't a valid Pokemon.\n", false);
+			}
+		}
+	}
+
+	private static String move(Pokemon friendly) {
+		// Allows the user to chose from the possible moves.
+
+		if(usersPokemons.contains(friendly)) {
+			return "hello";
+		}
+
+		return "hello";
 	}
 
 	private static void testing() {
+		// Erase at the end
 
 		// Used for testing
 		usersPokemons.add(pokedex.get(0));
@@ -190,6 +236,5 @@ public class PokemonArena {
 
 		enemiesPokemons = pokedex;
 		// End of testing stage
-
 	}
 }
