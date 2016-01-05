@@ -11,6 +11,8 @@ to-do:
 	- Battle Phase (PokemonArena.java)
 	- Winner (PokemonArena.java)
 	- Fix Move (PokemonArena.java)
+	- Change game to turn text into yellow (IO.java)
+	- Change the program to revert text to orginal colour incase of interruption (PokemonArena.java) in main method by catching InterruptedException
 */
 
 import java.util.*;
@@ -24,12 +26,12 @@ public class PokemonArena {
 	private static ArrayList<Pokemon> usersPokemons = new ArrayList<Pokemon>(); // Arraylist containg enemy's pokemons
 
 	public static void main(String[] args) {
-		// Graphics.start();
+		Graphics.start();
 		loadPokemons();
-		// choose4();
-		testing();
+		choose4();
+		// testing();
 		chosePokemon();
-		// Graphics.displayFinal(true);
+		Graphics.displayFinal(true);
 	}
 
 	private static void loadPokemons() {
@@ -41,7 +43,7 @@ public class PokemonArena {
 			inFile = new Scanner(new File("pokemon.txt"));
 		}
 		catch(IOException ex) {
-			System.out.println(ex);
+			IO.println("Unable to load pokemons from file. Please ensure the file is in the same directory as PokemonArena.java");
 		}
 
 		int numLine;
@@ -74,46 +76,54 @@ public class PokemonArena {
 		while(whileLoopFlag) {
 			IO.clear();
 			IO.scrollPrintText("You may chose ", false);
-			System.out.print(choicesLeft);
+			IO.print(IO.intToString(choicesLeft));
 			IO.scrollPrintText(" Pokemons out of the following ", false);
-			System.out.print(pokedex.size() + ":");
+			IO.print(pokedex.size() + ":");
 			System.out.println();
 
 			for(int i = 1; i <= pokedex.size(); i++) {
-				System.out.printf("\t%d - %s\n", i, pokedex.get(i-1).getName());
-				IO.pause(10);
+				IO.print("\t"+i + " - " + pokedex.get(i-1).getName()+"\n");
+				IO.pause(20);
 			}
 
 			IO.scrollPrintText("Enter the corresponding number to the Pokemon you want. There are ", false);
-			System.out.print(choicesLeft);
+			IO.print(IO.intToString(choicesLeft));
 			IO.scrollPrintText(" remaining.", true);
 
 			try {
+				IO.textToYellow();
 				selection = kb.nextInt();
+				IO.revertToOriginalColour();
 			}
 			catch(InputMismatchException ex) {
-				System.out.println("Please enter an integer.");
+				IO.println("Please enter an integer.");
+				IO.textToYellow();
 				kb.next();
+				IO.revertToOriginalColour();
 				selection = 0;
 			}
 
 			if (selection >= 1 && selection <= pokedex.size()) {
 				IO.clear();
-				System.out.printf("You chose %s.\n", pokedex.get(selection-1).getName());
+				System.out.print("You chose " + pokedex.get(selection-1).getName()+".\n");
 				Graphics.displayPokemon(pokedex.get(selection-1).getName(), false);
 				displayStatistics(pokedex.get(selection-1));
 				System.out.println();
 
 				IO.scrollPrintText("Would you like to add ", false);
-				System.out.print(pokedex.get(selection-1).getName());
+				IO.print(pokedex.get(selection-1).getName());
 				IO.scrollPrintText(" to your group [1 - Yes / 2 - No]: ", false);
 
 				try {
+					IO.textToYellow();
 					choice = kb.nextInt();
+					IO.revertToOriginalColour();
 				}
 				catch(InputMismatchException ex) {
-					System.out.println("Please enter an integer.");
+					IO.println("Please enter an integer.");
+					IO.textToYellow();
 					kb.next();
+					IO.revertToOriginalColour();
 					selection = 0;
 				}
 
@@ -143,29 +153,29 @@ public class PokemonArena {
 	private static void displayStatistics(Pokemon pokemon) {
 		// Displays the Pokemons main statistics
 
-		System.out.print("\t- ");
+		IO.print("\t- ");
 		IO.scrollPrintText("HP: ", false);
-		System.out.print(pokemon.getHP()+"\n");
+		IO.print(pokemon.getHP()+"\n");
 
-		System.out.print("\t- ");
+		IO.print("\t- ");
 		IO.scrollPrintText("Energy: ", false);
-		System.out.print(pokemon.getEnergy()+"\n");
+		IO.print(pokemon.getEnergy()+"\n");
 
-		System.out.print("\t- ");
+		IO.print("\t- ");
 		IO.scrollPrintText("Type: ", false);
-		System.out.print(pokemon.getType().substring(0, 1).toUpperCase() + pokemon.getType().substring(1)+"\n");
+		IO.print(pokemon.getType().substring(0, 1).toUpperCase() + pokemon.getType().substring(1)+"\n");
 
-		System.out.print("\t- ");
+		IO.print("\t- ");
 		IO.scrollPrintText("Resistance: ", false);
-		System.out.print(pokemon.getResistance().substring(0, 1).toUpperCase() + pokemon.getResistance().substring(1)+"\n");
+		IO.print(pokemon.getResistance().substring(0, 1).toUpperCase() + pokemon.getResistance().substring(1)+"\n");
 
-		System.out.print("\t- ");
+		IO.print("\t- ");
 		IO.scrollPrintText("Weakness: ", false);
-		System.out.print(pokemon.getWeakness().substring(0, 1).toUpperCase() + pokemon.getWeakness().substring(1)+"\n");
+		IO.print(pokemon.getWeakness().substring(0, 1).toUpperCase() + pokemon.getWeakness().substring(1)+"\n");
 
-		System.out.print("\t- ");
+		IO.print("\t- ");
 		IO.scrollPrintText("Number of Attacks: ", false);
-		System.out.print(pokemon.getNumOfAttacks()+"\n");
+		IO.print(pokemon.getNumOfAttacks()+"\n");
 
 		pokemon.displayAttacks();
 	}
@@ -175,47 +185,55 @@ public class PokemonArena {
 
 		Scanner kb = new Scanner(System.in);
 
-		IO.clear();
-		IO.scrollPrintText("Your group of pokemons consists of:\n", false);
-
-		for(int i = 1; i <= usersPokemons.size(); i++) {
-			System.out.print("\t"+i);
-			IO.scrollPrintText(" - ", false);
-			System.out.print(usersPokemons.get(i-1).getName()+ " (");
-			System.out.print(usersPokemons.get(i-1).findNumPossibleAttacks()+" attacks available, ");
-
-			if(usersPokemons.get(i-1).getHP() > 10) {
-				IO.scrollPrintText("Active)", false);
-			}
-			else if(usersPokemons.get(i-1).getHP() <= 10) {
-				IO.scrollPrintText("HP low)", false);
-			}
-			else {
-				IO.scrollPrintText("KO)", false);
-			}
-
-			System.out.println();
-		}
-
-		IO.scrollPrintText("Which Pokemon would you like to use to battle? ", false);
-
 		int selection = 5;
 		boolean whileLoopFlag = true;
 
 		while(whileLoopFlag) {
 
-			try {
-				selection = kb.nextInt();
-			}
-			catch(InputMismatchException ex) {
-				System.out.println("Please enter an Integer.");
-				selection = 5;
-				kb.next();
+			IO.clear();
+			IO.scrollPrintText("Your group of pokemons consists of:\n", false);
+
+			for(int i = 1; i <= usersPokemons.size(); i++) {
+				IO.print("\t"+i);
+				IO.scrollPrintText(" - ", false);
+				IO.print(usersPokemons.get(i-1).getName()+ " (");
+				IO.print(usersPokemons.get(i-1).findNumPossibleAttacks()+" attacks available, ");
+
+				if(usersPokemons.get(i-1).getHP() > 10) {
+					IO.scrollPrintText("Active)", false);
+				}
+				else if(usersPokemons.get(i-1).getHP() <= 10 && usersPokemons.get(i-1).getHP() != 0) {
+					IO.scrollPrintText("HP low)", false);
+				}
+				else {
+					IO.scrollPrintText("KO)", false);
+				}
+
+				System.out.println();
 			}
 
-			if(selection <= usersPokemons.size() && selection >= 0) {
+			IO.scrollPrintText("Which Pokemon would you like to use to battle? ", false);
+
+			try {
+				IO.textToYellow();
+				selection = kb.nextInt();
+				IO.revertToOriginalColour();
+			}
+			catch(InputMismatchException ex) {
+				IO.println("Please enter an Integer.");
+				selection = 5;
+				IO.textToYellow();
+				kb.next();
+				IO.revertToOriginalColour();
+			}
+
+			if(selection <= usersPokemons.size() && selection >= 0 && usersPokemons.get(selection-1).getHP() > 0) {
 				usersCurrentPokemon = selection-1;
 				whileLoopFlag = false;
+				IO.print(usersPokemons.get(selection-1).getName());
+				IO.scrollPrintText(", I chose you", false);
+				System.out.println();
+				IO.pause(500);
 			}
 			else {
 				IO.scrollPrintText("Sorry, that isn't a valid Pokemon.\n", false);
@@ -223,14 +241,21 @@ public class PokemonArena {
 		}
 	}
 
-	private static String move(Pokemon friendly) {
+	private static void move(Pokemon friendly) {
 		// Allows the user to chose from the possible moves.
 
 		if(usersPokemons.contains(friendly)) {
-			return "hello";
-		}
 
-		return "hello";
+			boolean isRetreatPossible;
+			if(usersPokemons.size() > 1) {
+				isRetreatPossible = true;
+			}
+			else {
+				isRetreatPossible = false;
+			}
+
+			System.out.println();
+		}
 	}
 
 	private static void testing() {

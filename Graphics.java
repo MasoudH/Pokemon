@@ -14,7 +14,7 @@ public class Graphics {
 		// Displays a text based version of the Pokemon logo
 		// and the creator of the game (Masoud Harati).
 		IO.clear();
-		System.out.println("Please Enter Full Screen mode in Terminal/CMD window for best results.");
+		IO.println("Please Enter Full Screen mode in Terminal/CMD window for best results.");
 		IO.pause(2000);
 		IO.clear();
 		display("logo");
@@ -75,12 +75,12 @@ public class Graphics {
 		}
 
 		catch (FileNotFoundException ex) {
-			System.out.println("Unable to find file. The extact error is: ");
+			IO.println("Unable to find file. The extact error is: ");
 			System.err.println(ex.getMessage());
 		} 
 
 		catch (IOException ex) {
-			System.out.println("The error is: ");
+			IO.println("The error is: ");
 			System.err.println(ex.getMessage());
 		}
 	}

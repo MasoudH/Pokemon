@@ -120,21 +120,21 @@ public class Pokemon {
 		// Displays the Pokemons different attacks
 
 		for(int i = 0; i < attacks.size(); i++) {
-			System.out.print("\t\t- ");
+			IO.print("\t\t- ");
 			IO.scrollPrintText("Name of Attack: ", false);
-			System.out.print(attacks.get(i).getAttackName()+"\n");
+			IO.print(attacks.get(i).getAttackName()+"\n");
 
-			System.out.print("\t\t\t- ");
+			IO.print("\t\t\t- ");
 			IO.scrollPrintText("Cost of Attack: ", false);
-			System.out.print(attacks.get(i).getAttackCost()+"\n");
+			IO.print(attacks.get(i).getAttackCost()+"\n");
 
-			System.out.print("\t\t\t- ");
+			IO.print("\t\t\t- ");
 			IO.scrollPrintText("Damage of Attack: ", false);
-			System.out.print(attacks.get(i).getAttackDamage()+"\n");
+			IO.print(attacks.get(i).getAttackDamage()+"\n");
 
-			System.out.print("\t\t\t- ");
+			IO.print("\t\t\t- ");
 			IO.scrollPrintText("Special Type: ", false);
-			System.out.print(attacks.get(i).getSpecialType().substring(0, 1).toUpperCase()+attacks.get(i).getSpecialType().substring(1)+"\n");
+			IO.print(attacks.get(i).getSpecialType().substring(0, 1).toUpperCase()+attacks.get(i).getSpecialType().substring(1)+"\n");
 		}
 	}
 
