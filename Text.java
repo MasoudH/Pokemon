@@ -7,7 +7,7 @@
 import java.util.*;
 import java.io.*;
 
-public class IO {
+public class Text {
 	// Used to improve interaction with user
 
 	public static final String ANSI_YELLOW = "\u001B[33m";
