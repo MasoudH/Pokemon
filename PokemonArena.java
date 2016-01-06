@@ -95,7 +95,9 @@ public class PokemonArena {
 			Text.scrollPrintText(" remaining.", true);
 
 			try {
+				Text.textToYellow();
 				selection = kb.nextInt();
+				Text.revertToOriginalColour();
 			}
 			catch(InputMismatchException ex) {
 				Text.println("Please enter an integer.");
@@ -105,7 +107,7 @@ public class PokemonArena {
 
 			if (selection >= 1 && selection <= pokedex.size()) {
 				Text.clear();
-				System.out.print("You chose " + pokedex.get(selection-1).getName()+".\n");
+				Text.print("You chose " + pokedex.get(selection-1).getName()+".\n");
 				Graphics.displayPokemon(pokedex.get(selection-1).getName(), false);
 				displayStatistics(pokedex.get(selection-1));
 				System.out.println();
@@ -115,15 +117,13 @@ public class PokemonArena {
 				Text.scrollPrintText(" to your group [1 - Yes / 2 - No]: ", false);
 
 				try {
-
+					Text.textToYellow();
 					choice = kb.nextInt();
-
+					Text.revertToOriginalColour();
 				}
 				catch(InputMismatchException ex) {
 					Text.println("Please enter an integer.");
-
 					kb.next();
-
 					selection = 0;
 				}
 
@@ -215,7 +215,9 @@ public class PokemonArena {
 			Text.scrollPrintText("Which Pokemon would you like to use to battle? ", false);
 
 			try {
+				Text.textToYellow();
 				selection = kb.nextInt();
+				Text.revertToOriginalColour();
 			}
 			catch(InputMismatchException ex) {
 				Text.println("Please enter an Integer.");
@@ -259,8 +261,8 @@ public class PokemonArena {
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
-				System.out.println("Pokemon");
 				Text.revertToOriginalColour();
+				Text.clear();
 			}
 		});
 	}
