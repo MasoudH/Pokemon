@@ -9,7 +9,6 @@ to-do:
 	- Give the user their options to for moves (PokemonArena.java)
 	- Battle Phase (PokemonArena.java)
 	- Winner (PokemonArena.java)
-	- Fix Move (PokemonArena.java)
 	- Comment (Everywhere)
 */
 
@@ -35,7 +34,7 @@ public class PokemonArena {
 		choose4();
 		// testing();
 		chosePokemon();
-		Graphics.displayFinal(true);
+		// Graphics.displayFinal(true);
 	}
 
 	private static void loadPokemons() {
