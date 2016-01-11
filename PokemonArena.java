@@ -3,6 +3,8 @@
 // January 13, 2016
 // Contains the main method. Also, includes the main layout of the game.
 
+// Ask if they can retreat to their old pokemon
+
 /*
 to-do:
 	- Add special attack (Special.java)
@@ -17,7 +19,7 @@ import java.io.*;
 
 public class PokemonArena {
 
-	private static int usersCurrentPokemon;
+	private static int usersCurrentPokemonIndex = 1;
 	private static ArrayList<Pokemon> pokedex = new ArrayList<Pokemon>(); // Arraylist containing all pokemons
 	private static ArrayList<Pokemon> enemiesPokemons = new ArrayList<Pokemon>(); // Arraylist containing users pokemons
 	private static ArrayList<Pokemon> usersPokemons = new ArrayList<Pokemon>(); // Arraylist containg enemy's pokemons
@@ -29,11 +31,12 @@ public class PokemonArena {
 		runtimeCheck.attachShutDownHook();
 
 		// Running the game
-		Graphics.start();
+		// Graphics.start();
 		loadPokemons();
-		choose4();
-		// testing();
-		chosePokemon();
+		// choose4();
+		testing();
+		// chosePokemon();
+		retreat(usersPokemons.get(0));
 		// Graphics.displayFinal(true);
 	}
 
@@ -187,29 +190,29 @@ public class PokemonArena {
 		int selection = 5;
 		boolean whileLoopFlag = true;
 
-		while(whileLoopFlag) {
+		Text.clear();
+		Text.scrollPrintText("Your group of pokemons consists of:\n", false);
 
-			Text.clear();
-			Text.scrollPrintText("Your group of pokemons consists of:\n", false);
+		for(int i = 1; i <= usersPokemons.size(); i++) {
+			Text.print("\t"+i);
+			Text.scrollPrintText(" - ", false);
+			Text.print(usersPokemons.get(i-1).getName()+ " (");
+			Text.print(usersPokemons.get(i-1).findNumPossibleAttacks()+" attacks available, ");
 
-			for(int i = 1; i <= usersPokemons.size(); i++) {
-				Text.print("\t"+i);
-				Text.scrollPrintText(" - ", false);
-				Text.print(usersPokemons.get(i-1).getName()+ " (");
-				Text.print(usersPokemons.get(i-1).findNumPossibleAttacks()+" attacks available, ");
-
-				if(usersPokemons.get(i-1).getHP() > 10) {
-					Text.scrollPrintText("Active)", false);
-				}
-				else if(usersPokemons.get(i-1).getHP() <= 10 && usersPokemons.get(i-1).getHP() != 0) {
-					Text.scrollPrintText("HP low)", false);
-				}
-				else {
-					Text.scrollPrintText("KO)", false);
-				}
-
-				System.out.println();
+			if(usersPokemons.get(i-1).getHP() > 10) {
+				Text.scrollPrintText("Active)", false);
 			}
+			else if(usersPokemons.get(i-1).getHP() <= 10 && usersPokemons.get(i-1).getHP() != 0) {
+				Text.scrollPrintText("HP low)", false);
+			}
+			else {
+				Text.scrollPrintText("KO)", false);
+			}
+
+			System.out.println();
+		}
+
+		while(whileLoopFlag) {
 
 			Text.scrollPrintText("Which Pokemon would you like to use to battle? ", false);
 
@@ -225,12 +228,12 @@ public class PokemonArena {
 			}
 
 			if(selection <= usersPokemons.size() && selection >= 0 && usersPokemons.get(selection-1).getHP() > 0) {
-				usersCurrentPokemon = selection-1;
+				usersCurrentPokemonIndex = selection-1;
 				whileLoopFlag = false;
 				Text.print(usersPokemons.get(selection-1).getName());
-				Text.scrollPrintText(", I chose you", false);
+				Text.scrollPrintText(", I chose you\n", false);
 				System.out.println();
-				Text.pause(500);
+				Text.pause(1000);
 			}
 			else {
 				Text.scrollPrintText("Sorry, that isn't a valid Pokemon.\n", false);
@@ -238,10 +241,14 @@ public class PokemonArena {
 		}
 	}
 
-	private static void move(Pokemon friendly) {
+	private static String move(Pokemon pokemon) {
 		// Allows the user to chose from the possible moves.
 
-		if(usersPokemons.contains(friendly)) {
+		boolean whileLoopFlag = true;
+		Scanner kb = new Scanner(System.in);
+		int selection = 0;
+
+		if(usersPokemons.contains(pokemon)) {
 
 			boolean isRetreatPossible;
 			if(usersPokemons.size() > 1) {
@@ -251,7 +258,128 @@ public class PokemonArena {
 				isRetreatPossible = false;
 			}
 
-			System.out.println();
+			Text.scrollPrintText(pokemon.getName(), true);
+
+			Text.scrollPrintText("1. Attack ("+pokemon.findNumPossibleAttacks()+" Available)", true);
+			if(isRetreatPossible) {
+				Text.scrollPrintText("2. Retreat", true);
+			}
+			Text.scrollPrintText("3. Pass", true);
+
+			Text.scrollPrintText("Please enter the number corresponding to the move you want.", true);
+
+			while(whileLoopFlag) {
+
+				try {
+					Text.textToYellow();
+					selection = kb.nextInt();
+					Text.revertToOriginalColour();
+				}
+				catch(InputMismatchException ex) {
+					Text.scrollPrintText("Please enter an Integer.", true);
+					selection = 4;
+					kb.next();
+				}
+
+				if(pokemon.findNumPossibleAttacks() > 0 && selection == 1) {
+					return "attack";
+				}
+				else if(pokemon.findNumPossibleAttacks() == 0 && selection == 1) {
+					Text.scrollPrintText("The Pokemon is too tired to perform an attack. Please choose another option.", true);
+					return "";
+				}
+
+				else if(selection == 2 && isRetreatPossible) {
+					return "retreat";
+				}
+
+				else if(selection == 3) {
+					return "pass";
+				}
+
+				else {
+					Text.scrollPrintText("Invalid, Please try again.", true);
+					return "";
+				}
+			}
+
+			return "";
+		}
+
+		else {
+			// For enemy pokemons choice
+
+			if(pokemon.findNumPossibleAttacks() > 0) {
+				return "attack";
+			}
+			else {
+				return "pass";
+			}
+		}
+	}
+
+	public static void pass(Pokemon pokemon) {
+		// Does nothing
+
+		Text.scrollPrintText("\n"+pokemon.getName()+"passed. Nothing happened.\n", true);
+	}
+
+	public static void retreat(Pokemon pokemon) {
+		// Allows the user to change their pokemon.
+
+		boolean whileLoopFlag = true;
+		Scanner kb = new Scanner(System.in);
+		int selection = 0;
+
+		Text.scrollPrintText("The following pokemons are available to chose from:", true);
+
+		for(int i = 1; i <= usersPokemons.size(); i++) {
+			Text.scrollPrintText("\t" + i + " - " + usersPokemons.get(i-1).getName(), true);
+		}
+
+		while(whileLoopFlag) {
+
+			Text.scrollPrintText("Enter the number corresponding to the Pokemon you would like to switch to.", true);
+
+			try {
+				Text.textToYellow();
+				selection = kb.nextInt();
+				Text.revertToOriginalColour();
+			}
+
+			catch(InputMismatchException ex) {
+				Text.scrollPrintText("Please enter an Integer.", true);
+				selection = 0;
+				kb.next();
+			}
+
+			if(selection - 1 >= 0 && selection <= usersPokemons.size() && selection - 1 != usersCurrentPokemonIndex) {
+				usersCurrentPokemonIndex = selection - 1;
+				Text.scrollPrintText("You switched to "+usersPokemons.get(selection-1)+".", true);
+				whileLoopFlag = false;
+			}
+			else if(selection - 1 == usersCurrentPokemonIndex) {
+				Text.scrollPrintText("You chose your current Pokemon please chose move again.", true);
+				Text.pause(1000);
+				Text.clear();
+				move(usersPokemons.get(usersCurrentPokemonIndex));
+				whileLoopFlag = false;
+			}
+			else {
+				Text.scrollPrintText("That is an invalid choice.", true);
+			}
+		}
+	}
+
+	public static void attack(Pokemon pokemon) {
+		boolean whileLoopFlag = true;
+		Scanner kb = new Scanner(System.in);
+		int selection = 0;
+
+		Text.scrollPrintText("The following attacks are available to chose from.", true);
+
+		for(int i = 1; i <= usersPokemons.size(); i++) {
+			
 		}
 	}
 

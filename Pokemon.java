@@ -120,21 +120,21 @@ public class Pokemon {
 		// Displays the Pokemons different attacks
 
 		for(int i = 0; i < attacks.size(); i++) {
-			IO.print("\t\t- ");
-			IO.scrollPrintText("Name of Attack: ", false);
-			IO.print(attacks.get(i).getAttackName()+"\n");
+			Text.print("\t\t- ");
+			Text.scrollPrintText("Name of Attack: ", false);
+			Text.print(attacks.get(i).getAttackName()+"\n");
 
-			IO.print("\t\t\t- ");
-			IO.scrollPrintText("Cost of Attack: ", false);
-			IO.print(attacks.get(i).getAttackCost()+"\n");
+			Text.print("\t\t\t- ");
+			Text.scrollPrintText("Cost of Attack: ", false);
+			Text.print(attacks.get(i).getAttackCost()+"\n");
 
-			IO.print("\t\t\t- ");
-			IO.scrollPrintText("Damage of Attack: ", false);
-			IO.print(attacks.get(i).getAttackDamage()+"\n");
+			Text.print("\t\t\t- ");
+			Text.scrollPrintText("Damage of Attack: ", false);
+			Text.print(attacks.get(i).getAttackDamage()+"\n");
 
-			IO.print("\t\t\t- ");
-			IO.scrollPrintText("Special Type: ", false);
-			IO.print(attacks.get(i).getSpecialType().substring(0, 1).toUpperCase()+attacks.get(i).getSpecialType().substring(1)+"\n");
+			Text.print("\t\t\t- ");
+			Text.scrollPrintText("Special Type: ", false);
+			Text.print(attacks.get(i).getSpecialType().substring(0, 1).toUpperCase()+attacks.get(i).getSpecialType().substring(1)+"\n");
 		}
 	}
 
@@ -142,12 +142,6 @@ public class Pokemon {
 		// Changes the value of the pokemon to stunned
 
 		stunned = true;
-	}
-
-	public void unstun() {
-		// Changes the value of the pokemon to not stunned
-
-		stunned = false;
 	}
 
 	public void disable() {
@@ -160,5 +154,35 @@ public class Pokemon {
 		// Changes the value of the pokemon to not disabled
 
 		disabled = false;
+	}
+
+	public void changeHP(int amount) {
+		if(hp + amount >= 50) {
+			hp = 50;
+		}
+		else if(energy + amount <= 0) {
+			hp = 0;
+		}
+		else {
+			hp -= amount;
+		}
+	}
+
+	public void changeEnergy(int amount) {
+		if(energy + amount >= 50) {
+			energy = 50;
+		}
+		else if(energy + amount <= 0) {
+			energy = 0;
+		}
+		else {
+			energy += amount;
+		}
+	}
+
+	public String toString() {
+		// Displays the pokemons statistics
+
+		return String.format("%s: %d/50 Energy, %d/%d HP", name, energy, hp, startHP);
 	}
 }

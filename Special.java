@@ -44,7 +44,11 @@ public class Special {
 		}
 	}
 
-	public wildstorm(Pokemon friendly, Pokemon enemy) {
+	public void wildstorm(Pokemon friendly, Pokemon enemy) {
+		// Base attack has a 50% chance of success, again no damage on a miss, but
+		// if it succeeds then the Pokemon does a free wild storm attack (yes this
+		// can go on forever.)
+
 		int count = 0;
 
 		System.out.print(friendly.getName());
@@ -58,7 +62,7 @@ public class Special {
 			count++;
 			boolean whileLoopFlag = true;
 
-			while(flag) {
+			while(whileLoopFlag) {
 				randomNum = rand.nextInt(2);
 
 				if(randomNum == 0) {
@@ -69,7 +73,30 @@ public class Special {
 			}
 		}
 
+		
 		System.out.print(count);
 		IO.scrollPrintText("times.", false);
+	}
+
+	public void disable(Pokemon enemy) {
+		// The target Pokemon becomes disabled, and its attacks will do 10 less
+		// damage for the rest of the battle (to a minimum of zero). A Pokemon
+		// can only be disabled once.
+
+		if (!enemy.getIsDisabled()) {
+			enemy.disable();
+			enemy.changeHP(-10);
+		}
+	}
+
+	public void recharge(friendly) {
+		// Adds 20 energy to the attacking Pokemon.
+
+		if(friendly.getEnergy <= 30) {
+			friendly.changeEnergy(20);
+		}
+		else {
+			friendly.changeEnergy(50-friendly.getEnergy());
+		}
 	}
 }
