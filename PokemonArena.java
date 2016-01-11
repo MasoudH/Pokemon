@@ -36,7 +36,7 @@ public class PokemonArena {
 		// choose4();
 		testing();
 		// chosePokemon();
-		retreat(usersPokemons.get(0));
+		// retreat(usersPokemons.get(0));
 		// Graphics.displayFinal(true);
 	}
 
@@ -371,16 +371,14 @@ public class PokemonArena {
 		}
 	}
 
-	public static void attack(Pokemon pokemon) {
+	public void attack(Pokemon pokemon) {
 		boolean whileLoopFlag = true;
 		Scanner kb = new Scanner(System.in);
 		int selection = 0;
 
 		Text.scrollPrintText("The following attacks are available to chose from.", true);
 
-		for(int i = 1; i <= usersPokemons.size(); i++) {
-			
-		}
+		usersPokemons.get(1).displayAttacks();
 	}
 
 	public void attachShutDownHook() {

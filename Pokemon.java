@@ -11,7 +11,7 @@ public class Pokemon {
 	private String name, resistance, weakness, type;
 	private int hp, startHP, numOfAttacks;
 	private int energy = 50;
-	private ArrayList<Attack> attacks = new ArrayList<Attack>();
+	private static ArrayList<Attack> attacks = new ArrayList<Attack>();
 	private boolean disabled = false;
 	private boolean stunned = false;
 
@@ -116,7 +116,7 @@ public class Pokemon {
 		return posAttackNum;
 	}
 
-	public void displayAttacks() {
+	public static void displayAttacks() {
 		// Displays the Pokemons different attacks
 
 		for(int i = 0; i < attacks.size(); i++) {
