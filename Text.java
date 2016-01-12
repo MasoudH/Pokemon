@@ -155,7 +155,7 @@ public class Text {
 	public static void scrollPrintText(String text, boolean printExtraLine) {
 		// Animated print function for printing text slowly
 
-		scrollPrint(text, 30, 60);
+		scrollPrint(text, 30, 40);
 
 		if (printExtraLine) {
 			System.out.println();

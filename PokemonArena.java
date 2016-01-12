@@ -33,11 +33,11 @@ public class PokemonArena {
 		// Running the game
 		// Graphics.start();
 		loadPokemons();
-		choose4();
-		// testing();
+		// choose4();
+		testing();
 		// chosePokemon();
 		// retreat(usersPokemons.get(0));
-		// attack();
+		attack(usersPokemons.get(1));
 		// Graphics.displayFinal(true);
 	}
 
@@ -369,6 +369,70 @@ public class PokemonArena {
 			else {
 				Text.scrollPrintText("That is an invalid choice.", true);
 			}
+		}
+	}
+
+	public static Attack attack(Pokemon pokemon) {
+		// Allows the user to chose the attack they want to use
+
+		ArrayList<Attack> pokemonsAttacks = new ArrayList<Attack>(); // List of the users pokemons attacks
+		Scanner kb = new Scanner(System.in);
+		int selection = 0;
+		boolean whileLoopFlag = true;
+		Random rand = new Random();
+
+		for(int i = 0; i < pokemon.getAttacks().size(); i++) {
+			if(pokemon.getAttacks().get(i).getAttackCost() <= pokemon.getEnergy()) {
+				pokemonsAttacks.add(pokemon.getAttacks().get(i));
+			}	
+		}
+
+		if(usersPokemons.contains(pokemon)) {
+			// if its the users pokemon
+
+			Text.scrollPrintText("The following attack are available to chose from: ", true);
+
+			for(int i = 1; i <= pokemonsAttacks.size(); i++) {
+
+				// Prints the pokemons attacks, spread into many statements for code neatness
+				Text.scrollPrintText("\t" + i + " - " + pokemonsAttacks.get(i-1).getAttackName(), false);
+				Text.scrollPrintText("(Energy Cost: " + pokemonsAttacks.get(i-1).getAttackCost() + ", ", false);
+				Text.scrollPrintText("Damage: " + pokemonsAttacks.get(i-1).getAttackDamage() + ", ", false);
+				Text.scrollPrintText("Special: " + pokemonsAttacks.get(i-1).getSpecialType().substring(0, 1).toUpperCase()+pokemonsAttacks.get(i-1).getSpecialType().substring(1) + ")", true);
+			}
+
+			Text.scrollPrintText("Enter the number corresponding to the attack you want.", true);
+
+			while(whileLoopFlag) {
+			 	
+			 	try {
+			 		Text.textToYellow();
+					selection = kb.nextInt();
+					Text.revertToOriginalColour();
+				}
+				catch(InputMismatchException ex) {
+					Text.scrollPrintText("Please enter an Integer.", true);
+					selection = 0;
+					kb.next();
+				}
+
+				if(selection > 0 && selection <= pokemonsAttacks.size()) {
+					whileLoopFlag = false;
+				}
+
+				else {
+					Text.scrollPrintText("Invalid, Please try again.", true);
+				}
+			}
+
+			return pokemonsAttacks.get(selection - 1);
+		}
+
+		else {
+			// Random attack selection for the enemy's behalf
+
+			int randomNum = rand.nextInt(pokemonsAttacks.size());
+			return pokemonsAttacks.get(randomNum);
 		}
 	}
 
