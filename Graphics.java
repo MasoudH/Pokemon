@@ -13,41 +13,41 @@ public class Graphics {
 	public static void start() {
 		// Displays a text based version of the Pokemon logo
 		// and the creator of the game (Masoud Harati).
-		IO.clear();
-		IO.println("Please Enter Full Screen mode in Terminal/CMD window for best results.");
-		IO.pause(2000);
-		IO.clear();
+		Text.clear();
+		Text.println("Please Enter Full Screen mode in Terminal/CMD window for best results.");
+		Text.pause(2000);
+		Text.clear();
 		display("logo");
-		IO.pause(500);
-		IO.clear();
+		Text.pause(500);
+		Text.clear();
 		display("masoud");
-		IO.pause(500);
-		IO.clear();
+		Text.pause(500);
+		Text.clear();
 	}
 
 	public static void displayPokemon(String name, boolean clear) {
 		// Displays a text based version of the pokemon.
 		if (clear) {
-			IO.clear();
+			Text.clear();
 		}
 
-		IO.pause(100);
+		Text.pause(100);
 		display(name);
-		IO.pause(100);
+		Text.pause(100);
 	}
 	
 	public static void displayFinal(boolean won) {
 		// Displays a text based version of "You Win!" or
 		// "Game Over." depending on the outcome of the game.
 
-		IO.clear();
+		Text.clear();
 		if (won) {
 			display("win");
 		} 
 		else {
 			display("lose");
 		}
-		IO.pause(1000);
+		Text.pause(1000);
 	}
 
 	public static void display(String name) {
@@ -65,7 +65,7 @@ public class Graphics {
 
 			while((line = in.readLine()) != null)
 			{
-			    IO.scrollPrintArt(line);
+			    Text.scrollPrintArt(line);
 			}
 
 			System.out.println();
@@ -75,12 +75,12 @@ public class Graphics {
 		}
 
 		catch (FileNotFoundException ex) {
-			IO.println("Unable to find file. The extact error is: ");
+			Text.println("Unable to find file. The extact error is: ");
 			System.err.println(ex.getMessage());
 		} 
 
 		catch (IOException ex) {
-			IO.println("The error is: ");
+			Text.println("The error is: ");
 			System.err.println(ex.getMessage());
 		}
 	}

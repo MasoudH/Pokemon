@@ -33,10 +33,11 @@ public class PokemonArena {
 		// Running the game
 		// Graphics.start();
 		loadPokemons();
-		// choose4();
-		testing();
+		choose4();
+		// testing();
 		// chosePokemon();
 		// retreat(usersPokemons.get(0));
+		// attack();
 		// Graphics.displayFinal(true);
 	}
 
@@ -369,16 +370,6 @@ public class PokemonArena {
 				Text.scrollPrintText("That is an invalid choice.", true);
 			}
 		}
-	}
-
-	public void attack(Pokemon pokemon) {
-		boolean whileLoopFlag = true;
-		Scanner kb = new Scanner(System.in);
-		int selection = 0;
-
-		Text.scrollPrintText("The following attacks are available to chose from.", true);
-
-		usersPokemons.get(1).displayAttacks();
 	}
 
 	public void attachShutDownHook() {
