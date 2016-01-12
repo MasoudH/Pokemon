@@ -436,6 +436,16 @@ public class PokemonArena {
 		}
 	}
 
+	public static void battle() {
+		// The battle phase of the game
+
+		Scanner kb = new Scanner(System.in);
+		Rand random = new Random();
+		boolean whileLoopFlag = true;
+
+
+	}
+
 	public void attachShutDownHook() {
 		// Call in main class for graceful shutdown
 
