@@ -1,6 +1,9 @@
 // Masoud Harati
 // Pokemon.java
 // January 13, 2016
+// Handles all the attributes of the Pokemon. Includes the Pokemon constructor method and
+// the all the getter and setter methods for the Pokemon. Does not include methods for the
+// Pokemons attacks.
 
 import java.util.*;
 import java.io.*;

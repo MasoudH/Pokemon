@@ -1,17 +1,20 @@
 // Masoud Harati
 // PokemonArena.java
 // January 13, 2016
-// Contains the main method. Also, includes the main layout of the game.
-
-// Ask if they can retreat to their old pokemon
+// Contains the main method. Also, includes the
 
 /*
 to-do:
 	- Add special attack (Special.java)
-	- Give the user their options to for moves (PokemonArena.java)
 	- Battle Phase (PokemonArena.java)
 	- Winner (PokemonArena.java)
-	- Comment (Everywhere)
+	- Comment in the following files:
+		- PokemonArena.java
+		- Special.java
+		- Text.java
+		- Pokemon.java
+		- Attack.java
+		- Graphics.java
 */
 
 import java.util.*;
@@ -25,6 +28,7 @@ public class PokemonArena {
 	private static ArrayList<Pokemon> usersPokemons = new ArrayList<Pokemon>(); // Arraylist containg enemy's pokemons
 
 	public static void main(String[] args) {
+		// Main method runs the PokemonArena game.
 		
 		// Setting up graceful shutdown
 		PokemonArena runtimeCheck = new PokemonArena();
@@ -36,13 +40,12 @@ public class PokemonArena {
 		// choose4();
 		testing();
 		// chosePokemon();
-		// retreat(usersPokemons.get(0));
-		attack(usersPokemons.get(1));
 		// Graphics.displayFinal(true);
 	}
 
 	private static void loadPokemons() {
-		// Reads pokemon.txt, and stores the data in the pokedex arraylist
+		// Reads pokemon.txt, and stores the data for the pokemons in the pokedex
+		// arraylist
 
 		Scanner inFile = null;
 
@@ -71,7 +74,7 @@ public class PokemonArena {
 		int choicesLeft = 4;
 		int choice = 0;
 		boolean whileLoopFlag = true;
-		Scanner kb = new Scanner(System.in); // Intilization of scanner to gather input
+		Scanner kb = new Scanner(System.in);
 
 
 		// Start of Introduction
@@ -89,6 +92,8 @@ public class PokemonArena {
 			System.out.println();
 
 			for(int i = 1; i <= pokedex.size(); i++) {
+				// Displays all the available Pokemons to the user.
+
 				Text.print("\t"+i + " - " + pokedex.get(i-1).getName()+"\n");
 				Text.pause(20);
 			}
@@ -103,8 +108,10 @@ public class PokemonArena {
 				Text.revertToOriginalColour();
 			}
 			catch(InputMismatchException ex) {
+				// If user doesn't input an Integer. requests for integer to be selected
+
 				Text.println("Please enter an integer.");
-				kb.next();
+				kb.next(); // Flushes the users invalid input
 				selection = 0;
 			}
 
@@ -125,28 +132,40 @@ public class PokemonArena {
 					Text.revertToOriginalColour();
 				}
 				catch(InputMismatchException ex) {
+					// If the user doesn't input an Integer, requests for an integer to be selected
+
 					Text.println("Please enter an integer.");
 					kb.next();
 					selection = 0;
 				}
 
 				if(choice == 1) {
+					// If the user confirms their choice
+
 					choicesLeft -= 1;
 					usersPokemons.add(pokedex.get(selection-1));
 					pokedex.remove(pokedex.get(selection-1));
 				}
 				else if(choice == 2) {
+					// If the user declines their choice 
+
 					Text.scrollPrintText("Please chose another pokemon.", true);
 				}
 				else {
+					// If the user enters and invalid Integer. Either too high or too low. 
+
 					Text.scrollPrintText("That is not a valid choice. Please enter a valid number.", true);
 				}
 			}
 			else {
+				// If the user enters and invalid Integer. Either too high or too low.
+
 				Text.scrollPrintText("That is not a valid choice. Please enter a valid number.", true);
 			}
 
 			if (choicesLeft == 0) {
+				// The base case. If the user chose 4 pokemons it exits the loops and continues the game.
+
 				enemiesPokemons = pokedex; // Adds the rest of the pokemons to the enemies group.
 				whileLoopFlag = false; // Ends loop when there are no choices left.
 			}
@@ -436,14 +455,8 @@ public class PokemonArena {
 		}
 	}
 
-	public static void battle() {
-		// The battle phase of the game
-
-		Scanner kb = new Scanner(System.in);
-		Rand random = new Random();
-		boolean whileLoopFlag = true;
-
-
+	public static void round(Pokemon player1, Pokemon player2) {
+		if(player1.is)
 	}
 
 	public void attachShutDownHook() {

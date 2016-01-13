@@ -1,8 +1,9 @@
 // Masoud Harati
-// io.java
+// Text.java
 // January 13, 2016
-// Basic Input and Output functions which allow text to be
-// displayed on the screen and recieving inputs.
+// Basic Input and Output functions which allow text to be displayed on the screen,
+// such as, printing text onto the screen slowly, changing the text colour, and
+// clearing the window.
 
 import java.util.*;
 import java.io.*;

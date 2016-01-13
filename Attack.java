@@ -1,6 +1,8 @@
 // Masoud Harati
 // Attack.java
 // January 13, 2016
+// Handles the getter methods for the Pokemons Attacks, also contains the constructor method for
+// the pokemons properties of the pokemons attack.
 
 import java.util.*;
 import java.io.*;

@@ -1,7 +1,8 @@
 // Masoud Harati
 // Graphics.java
 // January 13, 2016
-// Text-Based Graphical animations used to give the user a better experience
+// Text-Based graphical animations used to give the user a better experience,
+// the graphics is displayed in ASCII format.
 
 import java.util.*;
 import java.io.*;
@@ -13,6 +14,7 @@ public class Graphics {
 	public static void start() {
 		// Displays a text based version of the Pokemon logo
 		// and the creator of the game (Masoud Harati).
+
 		Text.clear();
 		Text.println("Please Enter Full Screen mode in Terminal/CMD window for best results.");
 		Text.pause(2000);
@@ -27,6 +29,7 @@ public class Graphics {
 
 	public static void displayPokemon(String name, boolean clear) {
 		// Displays a text based version of the pokemon.
+
 		if (clear) {
 			Text.clear();
 		}
@@ -41,12 +44,14 @@ public class Graphics {
 		// "Game Over." depending on the outcome of the game.
 
 		Text.clear();
+
 		if (won) {
-			display("win");
+			display("win"); // Displays "You Win!"
 		} 
 		else {
-			display("lose");
+			display("lose"); // Displays "You Lose!"
 		}
+		
 		Text.pause(1000);
 	}
 

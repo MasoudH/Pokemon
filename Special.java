@@ -9,7 +9,7 @@ import java.io.*;
 public class Special {
 	public void stun(Pokemon friendly, Pokemon enemy) {
 		// Stun: on top of normal damage there is a 50% chance that the opponent 
-		// will be stunned for one turn. If a Pokemon is stunned it my not attack
+		// will be stunned for one turn. If a Pokemon is stunned it may not attack
 		// or retreat.
 
 		System.out.print(friendly.getName());
