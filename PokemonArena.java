@@ -526,6 +526,84 @@ public class PokemonArena {
 		}
 	}
 
+	public static void battle() {
+		// The battle phase of the Pokemon. Goes through rounds of battle until the user or the enemy run
+		// out of Pokemons.
+
+		Random rand = new Random();
+		int randomNum = rand.nextInt(2);
+		int enemiesPokemonIndex = rand.nextInt(enemiesPokemons.size());
+		boolean whileLoopFlag = true;
+
+
+		Text.pause(700);
+
+		Text.scrollPrintText("A wild " + enemiesPokemons.get(enemiesPokemonIndex).getName() + " appeared!\n\n", true);
+
+		Text.pause(1000);
+
+		chosePokemon(); // Prompts the user to chose their Pokemon
+
+		Text.pause(700);
+
+		if(randomNum == 0) {
+			// The user goes first
+
+			Text.scrollPrintText(usersPokemons.get(usersCurrentPokemonIndex).getName() + " gets to go first!", true);
+		}
+		else {
+			Text.scrollPrintText(enemiesPokemons.get(enemiesPokemonIndex).getName() + "gets to go first!", true);
+		}
+
+		Text.pause(700);
+
+
+		while(whileLoopFlag) {
+
+			if(usersPokemons.get(usersCurrentPokemonIndex).isDead()) {
+
+				Text.scrollPrintText(enemiesPokemons.get(enemiesPokemonIndex).getName() + " killed " + usersPokemons.get(usersCurrentPokemonIndex).getName(), true);
+				usersPokemons.remove(usersCurrentPokemonIndex);
+				chosePokemon(); // Prompts the user to chose a Pokemon because their Pokemon is dead.
+			}
+			if(enemiesPokemons.get(enemiesPokemonIndex).isDead()) {
+
+				Text.scrollPrintText(usersPokemons.get(usersCurrentPokemonIndex).getName() + " killed " + enemiesPokemons.get(enemiesPokemonIndex).getName(), true);
+				enemiesPokemons.remove(enemiesPokemonIndex);
+				enemiesPokemonIndex = rand.nextInt(enemiesPokemons.size()); // Choses a new Pokemon for the enemy
+			}
+			else {
+
+				if(randomNum == 0) {
+
+					round(usersPokemons.get(usersCurrentPokemonIndex), enemiesPokemons.get(enemiesPokemonIndex));
+				}
+				else {
+
+					round(enemiesPokemons.get(enemiesPokemonIndex), usersPokemons.get(usersCurrentPokemonIndex));
+				}
+			}
+
+			for(int i = 0; i < usersPokemons.size(); i++) {
+				// Heals all of the users Pokemons by 20 HP
+
+				usersPokemons.get(i).changeHP(20);
+				usersPokemons.get(i).undisable(); // undisable the users Pokemons if they were disabled
+			}
+
+			for(int i = 0; i < usersPokemons.size(); i++) {
+				// undisables the enemies Pokemons
+
+				enemiesPokemons.get(i).undisable();
+			}
+		}
+	}
+
+	// public static String handleBattle() {
+	// 	// Creates the battle and checks which user 
+
+	// }
+
 	public void attachShutDownHook() {
 		// Call in main class for graceful shutdown
 

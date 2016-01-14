@@ -170,6 +170,12 @@ public class Pokemon {
 		disabled = true;
 	}
 
+	public void undisable() {
+		// Changes the value of the pokemon to not disabled
+
+		disabled = false;
+	}
+
 	public void changeHP(int amount) {
 		if(hp + amount >= 50) {
 			hp = 50;
