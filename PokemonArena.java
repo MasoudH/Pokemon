@@ -1,15 +1,7 @@
 // Masoud Harati
 // PokemonArena.java
 // January 13, 2016
-// Contains the main method. Also, includes the
-
-/*
-to-do:
-	- Comment in the following files:
-		- PokemonArena.java
-		- Pokemon.java
-		- Attack.java
-*/
+// Contains the main method, which runs the Pokemon Arena game.
 
 import java.util.*;
 import java.io.*;
@@ -269,6 +261,7 @@ public class PokemonArena {
 		Text.clear();
 
 		if(usersPokemons.contains(pokemon)) {
+			// For user choice
 
 			boolean isRetreatPossible;
 			if(usersPokemons.size() > 1) {
@@ -296,9 +289,11 @@ public class PokemonArena {
 					Text.revertToOriginalColour();
 				}
 				catch(InputMismatchException ex) {
+					// Prompts user for another input and flushes their input because its not an Integer.
+
 					Text.scrollPrintText("Please enter an Integer.", true);
 					selection = 4;
-					kb.next();
+					kb.next(); // Flushes the users previous answer
 				}
 
 				if(pokemon.findNumPossibleAttacks() > 0 && selection == 1) {
@@ -338,13 +333,13 @@ public class PokemonArena {
 		}
 	}
 
-	public static void pass(Pokemon pokemon) {
-		// Does nothing
+	private static void pass(Pokemon pokemon) {
+		// Does nothing. Skips users turn.
 
 		Text.scrollPrintText("\n"+pokemon.getName()+"passed. Nothing happened.\n", true);
 	}
 
-	public static void retreat(Pokemon pokemon) {
+	private static void retreat(Pokemon pokemon) {
 		// Allows the user to change their pokemon.
 
 		boolean whileLoopFlag = true;
@@ -370,9 +365,11 @@ public class PokemonArena {
 			}
 
 			catch(InputMismatchException ex) {
+				// Prompts user for another input and flushes their input because its not an Integer.
+
 				Text.scrollPrintText("Please enter an Integer.", true);
 				selection = 0;
-				kb.next();
+				kb.next(); // Flushes the users previous output.
 			}
 
 			if(selection - 1 >= 0 && selection <= usersPokemons.size() && selection - 1 != usersCurrentPokemonIndex) {
@@ -393,7 +390,7 @@ public class PokemonArena {
 		}
 	}
 
-	public static Attack attack(Pokemon pokemon) {
+	private static Attack attack(Pokemon pokemon) {
 		// Allows the user to chose the attack they want to use
 
 		ArrayList<Attack> pokemonsAttacks = new ArrayList<Attack>(); // List of the users pokemons attacks
@@ -434,9 +431,11 @@ public class PokemonArena {
 					Text.revertToOriginalColour();
 				}
 				catch(InputMismatchException ex) {
+					// Prompts user for another input and flushes their input because its not an Integer.
+
 					Text.scrollPrintText("Please enter an Integer.", true);
 					selection = 0;
-					kb.next();
+					kb.next(); // Flushes the users previous input
 				}
 
 				if(selection > 0 && selection <= pokemonsAttacks.size()) {
@@ -459,7 +458,9 @@ public class PokemonArena {
 		}
 	}
 
-	public static void round(Pokemon player1, Pokemon player2) {
+	private static void round(Pokemon player1, Pokemon player2) {
+		// Completes a round of turns and in the end it increases the energy of all the remaining Pokemons.
+
 		if(!player1.getIsStunned()) {
 
 			String choice = move(player1);
@@ -530,7 +531,7 @@ public class PokemonArena {
 		}
 	}
 
-	public static void battle() {
+	private static void battle() {
 		// The battle phase of the Pokemon. Goes through rounds of battle until the user or the enemy run
 		// out of Pokemons.
 
@@ -565,24 +566,29 @@ public class PokemonArena {
 		while(whileLoopFlag) {
 
 			if(usersPokemons.get(usersCurrentPokemonIndex).isDead()) {
+				// If the users Pokemon dies
 
 				Text.scrollPrintText(enemiesPokemons.get(enemiesPokemonIndex).getName() + " killed " + usersPokemons.get(usersCurrentPokemonIndex).getName(), true);
 				usersPokemons.remove(usersCurrentPokemonIndex);
 				chosePokemon(); // Prompts the user to chose a Pokemon because their Pokemon is dead.
 			}
 			if(enemiesPokemons.get(enemiesPokemonIndex).isDead()) {
+				// If the enemies Pokemon dies
 
 				Text.scrollPrintText(usersPokemons.get(usersCurrentPokemonIndex).getName() + " killed " + enemiesPokemons.get(enemiesPokemonIndex).getName(), true);
 				enemiesPokemons.remove(enemiesPokemonIndex);
 				enemiesPokemonIndex = rand.nextInt(enemiesPokemons.size()); // Choses a new Pokemon for the enemy
 			}
 			else {
+				// Determines who plays first
 
 				if(randomNum == 0) {
+					// User Plays first
 
 					round(usersPokemons.get(usersCurrentPokemonIndex), enemiesPokemons.get(enemiesPokemonIndex));
 				}
 				else {
+					// Enemy plays first
 
 					round(enemiesPokemons.get(enemiesPokemonIndex), usersPokemons.get(usersCurrentPokemonIndex));
 				}
@@ -603,7 +609,7 @@ public class PokemonArena {
 		}
 	}
 
-	public static String completeBattle() {
+	private static String completeBattle() {
 		// Creates the battle and checks which user 
 
 		String out = ""; // Wether the user won or not
@@ -632,7 +638,7 @@ public class PokemonArena {
 		return out;
 	}
 
-	public void attachShutDownHook() {
+	private void attachShutDownHook() {
 		// Call in main class for graceful shutdown
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {
