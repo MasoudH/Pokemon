@@ -214,6 +214,8 @@ public class PokemonArena {
 		Text.scrollPrintText("Your group of pokemons consists of:\n", false);
 
 		for(int i = 1; i <= usersPokemons.size(); i++) {
+			// Only allows the user to chose a pokemon if their is atleast 2 available
+
 			Text.print("\t"+i);
 			Text.scrollPrintText(" - ", false);
 			Text.print(usersPokemons.get(i-1).getName()+ " (");
@@ -242,6 +244,8 @@ public class PokemonArena {
 				Text.revertToOriginalColour();
 			}
 			catch(InputMismatchException ex) {
+				// If the input isn't an Integer prompts for an Integer input.
+
 				Text.println("Please enter an Integer.");
 				selection = 5;
 				kb.next();
@@ -456,7 +460,15 @@ public class PokemonArena {
 	}
 
 	public static void round(Pokemon player1, Pokemon player2) {
-		if(player1.is)
+		if(!player1.isStunned()) {
+
+			String choice = choseMove(player1);
+
+			if(choice.equals("attack")) {
+				player1.attack(attack(p1), p2)
+			}
+
+		}
 	}
 
 	public void attachShutDownHook() {

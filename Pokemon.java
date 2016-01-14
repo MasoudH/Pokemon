@@ -184,6 +184,20 @@ public class Pokemon {
 		}
 	}
 
+	public void attack(Attack attack, Pokemon enemy) {
+		// Attack method that takes in the attack and the enemy and considers if the Pokemon is
+		// weak or resistant to the attack and calculates all the damage.
+
+		double damage = 1;
+
+		Text.scrollPrintText(this.getName() + "used " + attack.getAttackName() + "against " + enemy.getName(), true);
+
+		if(enemy.getResistance().equals(this.getType())) {
+			Text.scrollPrintText(this, false);
+		}
+
+	}
+
 	public String toString() {
 		// Displays the pokemons statistics
 
