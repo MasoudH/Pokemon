@@ -599,10 +599,32 @@ public class PokemonArena {
 		}
 	}
 
-	// public static String handleBattle() {
-	// 	// Creates the battle and checks which user 
+	public static String completeBattle() {
+		// Creates the battle and checks which user 
 
-	// }
+		String out = ""; // Wether the user won or not
+		boolean whileLoopFlag = true;
+
+		while(whileLoopFlag) {
+
+			battle();
+
+			if(usersPokemons.size() == 0) {
+				// If all of the users Pokemons die
+
+				out = "lost";
+				whileLoopFlag = false;
+			}
+			if(enemiesPokemons.size() == 0) {
+				// If all of the enemies Pokemons die
+
+				out = "win";
+				whileLoopFlag = true;
+			}
+		}
+		
+		return out;
+	}
 
 	public void attachShutDownHook() {
 		// Call in main class for graceful shutdown
