@@ -190,12 +190,32 @@ public class Pokemon {
 
 		double damage = 1;
 
-		Text.scrollPrintText(this.getName() + "used " + attack.getAttackName() + "against " + enemy.getName(), true);
+		Text.scrollPrintText(this.getName() + " used " + attack.getAttackName() + " against " + enemy.getName(), true);
 
 		if(enemy.getResistance().equals(this.getType())) {
-			Text.scrollPrintText(this, false);
+			Text.scrollPrintText(enemy.getName() + " is resistant to " + this.getType() + ", the damage dealt was cut in half.", true);
+		}
+		else if(enemy.getWeakness().equals(this.getType())) {
+			Text.scrollPrintText(enemy.getName() + "'s weakness is " + this.getType() + ", the damage dealt was doubled.", true);
 		}
 
+		damage *= attack.doSpecial(this, enemy); // Performs the special attacks and returns the results
+		energy -= attack.getAttackCost(); // Subtracts the energy cost
+
+		if(getIsDisabled()) {
+			// Does 10 less damage if the Pokemon is disabled
+
+			damage *= Math.max(attack.getAttackDamage() - 10, 0);
+		}
+		else {
+			// Does regular damage if the Pokemon isn't diabled
+
+			damage *= attack.getAttackDamage();
+		}
+
+		enemy.changeHP((int)(-1*damage));
+
+		Text.scrollPrintText(enemy.getName() + " lost " + (int) damage + " HP.", true);
 	}
 
 	public String toString() {

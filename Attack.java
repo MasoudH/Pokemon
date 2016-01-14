@@ -156,7 +156,6 @@ public class Attack {
 
 		if (!enemy.getIsDisabled()) {
 			enemy.disable();
-			enemy.changeHP(-10);
 			Text.scrollPrintText(friendly.getName() + "used disable on " + enemy.getName() + "and was successful.", true);
 		}
 
