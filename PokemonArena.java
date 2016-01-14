@@ -5,16 +5,12 @@
 
 /*
 to-do:
-	- Add special attack (Special.java)
 	- Battle Phase (PokemonArena.java)
 	- Winner (PokemonArena.java)
 	- Comment in the following files:
 		- PokemonArena.java
-		- Special.java
-		- Text.java
 		- Pokemon.java
 		- Attack.java
-		- Graphics.java
 */
 
 import java.util.*;
@@ -460,14 +456,73 @@ public class PokemonArena {
 	}
 
 	public static void round(Pokemon player1, Pokemon player2) {
-		if(!player1.isStunned()) {
+		if(!player1.getIsStunned()) {
 
-			String choice = choseMove(player1);
+			String choice = move(player1);
 
 			if(choice.equals("attack")) {
-				player1.attack(attack(p1), p2)
+
+				player1.attack(attack(player1), player2);
+			}
+			else if(choice.equals("pass")) {
+
+				pass(player1);
+			}
+			else if(choice.equals("retreat")) {
+
+				retreat(player1);
+				player1 = usersPokemons.get(usersCurrentPokemonIndex);
+			}
+		}
+
+		else {
+
+			Text.scrollPrintText(player1.getName() + "was stunned, and couldn't do anything", true);
+			player1.unstun();
+		}
+
+		Text.pause(2000);
+		Text.clear();
+
+		if(!player2.isDead()) {
+
+			if(!player2.getIsStunned()) {
+
+				String choice = move(player2);
+				if(choice.equals("attack")) {
+
+					player2.attack(attack(player2), player1);
+				}
+				else if(choice.equals("pass")) {
+
+					pass(player2);
+				}
+				else if(choice.equals("retreat")) {
+
+					retreat(player2);
+					player2 = usersPokemons.get(usersCurrentPokemonIndex);
+				}
 			}
 
+			else {
+
+				Text.scrollPrintText(player2.getName() + "was stunned, and couldn't do anything", true);
+				player2.unstun();
+			}
+		}
+
+		Text.pause(2000);
+
+		for(int i = 0; i < usersPokemons.size(); i++) {
+			// Increases the energy for the users Pokemons
+
+			usersPokemons.get(i).changeEnergy(10);
+		}
+
+		for(int i = 0; i < enemiesPokemons.size(); i++) {
+			// Increases the energy of the enemies Pokemons
+
+			enemiesPokemons.get(i).changeEnergy(10);
 		}
 	}
 

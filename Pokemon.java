@@ -119,6 +119,16 @@ public class Pokemon {
 		return posAttackNum;
 	}
 
+	public boolean isDead() {
+		// Returns true if the Pokemon is dead and false if the Pokemon is alive.
+
+		if(hp <= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void displayAttacks() {
 		// Displays the Pokemons different attacks
 
@@ -148,16 +158,16 @@ public class Pokemon {
 		stunned = true;
 	}
 
+	public void unstun() {
+		// Changes the value of the pokemon's stun value to not stunned
+
+		stunned = false;
+	}
+
 	public void disable() {
 		// Changes the value of the pokemon to disabled
 
 		disabled = true;
-	}
-
-	public void undisable() {
-		// Changes the value of the pokemon to not disabled
-
-		disabled = false;
 	}
 
 	public void changeHP(int amount) {
