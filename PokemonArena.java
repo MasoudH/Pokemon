@@ -5,8 +5,6 @@
 
 /*
 to-do:
-	- Battle Phase (PokemonArena.java)
-	- Winner (PokemonArena.java)
 	- Comment in the following files:
 		- PokemonArena.java
 		- Pokemon.java
@@ -31,12 +29,10 @@ public class PokemonArena {
 		runtimeCheck.attachShutDownHook();
 
 		// Running the game
-		// Graphics.start();
+		Graphics.start();
 		loadPokemons();
-		// choose4();
-		testing();
-		// chosePokemon();
-		// Graphics.displayFinal(true);
+		choose4();
+		completeBattle();
 	}
 
 	private static void loadPokemons() {
@@ -165,6 +161,8 @@ public class PokemonArena {
 				enemiesPokemons = pokedex; // Adds the rest of the pokemons to the enemies group.
 				whileLoopFlag = false; // Ends loop when there are no choices left.
 			}
+
+			Text.clear();
 		}
 	}
 
@@ -206,7 +204,7 @@ public class PokemonArena {
 		int selection = 5;
 		boolean whileLoopFlag = true;
 
-		Text.clear();
+		Text.scrollPrintText("\n\n\n", true);
 		Text.scrollPrintText("Your group of pokemons consists of:\n", false);
 
 		for(int i = 1; i <= usersPokemons.size(); i++) {
@@ -267,6 +265,8 @@ public class PokemonArena {
 		boolean whileLoopFlag = true;
 		Scanner kb = new Scanner(System.in);
 		int selection = 0;
+
+		Text.clear();
 
 		if(usersPokemons.contains(pokemon)) {
 
@@ -351,6 +351,8 @@ public class PokemonArena {
 		Scanner kb = new Scanner(System.in);
 		int selection = 0;
 
+		Text.clear();
+
 		Text.scrollPrintText("The following pokemons are available to chose from:", true);
 
 		for(int i = 1; i <= usersPokemons.size(); i++) {
@@ -399,6 +401,8 @@ public class PokemonArena {
 		int selection = 0;
 		boolean whileLoopFlag = true;
 		Random rand = new Random();
+
+		Text.clear();
 
 		for(int i = 0; i < pokemon.getAttacks().size(); i++) {
 			if(pokemon.getAttacks().get(i).getAttackCost() <= pokemon.getEnergy()) {
@@ -477,7 +481,7 @@ public class PokemonArena {
 
 		else {
 
-			Text.scrollPrintText(player1.getName() + "was stunned, and couldn't do anything", true);
+			Text.scrollPrintText(player1.getName() + " was stunned, and couldn't do anything", true);
 			player1.unstun();
 		}
 
@@ -506,7 +510,7 @@ public class PokemonArena {
 
 			else {
 
-				Text.scrollPrintText(player2.getName() + "was stunned, and couldn't do anything", true);
+				Text.scrollPrintText(player2.getName() + " was stunned, and couldn't do anything", true);
 				player2.unstun();
 			}
 		}
@@ -552,7 +556,7 @@ public class PokemonArena {
 			Text.scrollPrintText(usersPokemons.get(usersCurrentPokemonIndex).getName() + " gets to go first!", true);
 		}
 		else {
-			Text.scrollPrintText(enemiesPokemons.get(enemiesPokemonIndex).getName() + "gets to go first!", true);
+			Text.scrollPrintText(enemiesPokemons.get(enemiesPokemonIndex).getName() + " gets to go first!", true);
 		}
 
 		Text.pause(700);
@@ -611,14 +615,16 @@ public class PokemonArena {
 
 			if(usersPokemons.size() == 0) {
 				// If all of the users Pokemons die
-
-				out = "lost";
+				Graphics.display("lose");
+				Text.scrollPrintText("\n\nSorry you lost and did not become TRAINER SUPREME.", true);
 				whileLoopFlag = false;
 			}
 			if(enemiesPokemons.size() == 0) {
 				// If all of the enemies Pokemons die
 
-				out = "win";
+				Graphics.display("win");
+				Text.scrollPrintText("\n\n", true);
+				Text.scrollPrintText("\n\nWow, I wasn't expecting that. I hereby declare you, TRAINER SUPREME!", true);
 				whileLoopFlag = true;
 			}
 		}
@@ -635,24 +641,5 @@ public class PokemonArena {
 				Text.clear();
 			}
 		});
-	}
-
-	private static void testing() {
-		// Erase at the end
-
-		Text.clear();
-
-		// Used for testing
-		usersPokemons.add(pokedex.get(0));
-		usersPokemons.add(pokedex.get(1));
-		usersPokemons.add(pokedex.get(2));
-		usersPokemons.add(pokedex.get(3));
-
-		for(int i = 0; i < 4; i++) {
-			pokedex.remove(pokedex.get(0));
-		}
-
-		enemiesPokemons = pokedex;
-		// End of testing stage
 	}
 }

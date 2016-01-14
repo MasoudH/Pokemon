@@ -77,18 +77,17 @@ public class Attack {
 		// will be stunned for one turn. If a Pokemon is stunned it may not attack
 		// or retreat.
 
-		System.out.print(friendly.getName());
+		Text.scrollPrintText(friendly.getName(), false);
 
 		Random rand = new Random();
 		int randomNum = rand.nextInt(2);
 
 		if(randomNum == 1) {
-			Text.scrollPrintText(" used stun and was successful. ", true);
-			System.out.print(enemy.getName()+"\n");
+			Text.scrollPrintText(" used stun and was successful.", true);
 			enemy.stun();
 		}
 		else {
-			Text.scrollPrintText(" used stun and was unsuccessful.\n", true);
+			Text.scrollPrintText(" used stun and was unsuccessful.", true);
 		}
 
 		return 1;
@@ -98,7 +97,7 @@ public class Attack {
 		// Wild Card: The attack only has a 50% chance of success. If it does not
 		// succeed no damage is done.
 
-		System.out.print(friendly.getName());
+		Text.scrollPrintText(friendly.getName(), true);
 
 		Random rand = new Random();
 		int randomNum = rand.nextInt(2);
@@ -120,7 +119,7 @@ public class Attack {
 
 		int count = 0;
 
-		System.out.print(friendly.getName());
+		Text.scrollPrintText(friendly.getName(), false);
 		Text.scrollPrintText(" used wild storm. The damage was increased by ", true);
 
 		Random rand = new Random();
@@ -143,7 +142,7 @@ public class Attack {
 		}
 
 		
-		System.out.print(count);
+		Text.scrollPrintText(Text.intToString(count), false);
 		Text.scrollPrintText("times.", true);
 
 		return count;

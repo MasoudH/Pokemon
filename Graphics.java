@@ -38,22 +38,6 @@ public class Graphics {
 		display(name);
 		Text.pause(100);
 	}
-	
-	public static void displayFinal(boolean won) {
-		// Displays a text based version of "You Win!" or
-		// "Game Over." depending on the outcome of the game.
-
-		Text.clear();
-
-		if (won) {
-			display("win"); // Displays "You Win!"
-		} 
-		else {
-			display("lose"); // Displays "You Lose!"
-		}
-		
-		Text.pause(1000);
-	}
 
 	public static void display(String name) {
 		// Displays an ASCII version of the Pokemon.

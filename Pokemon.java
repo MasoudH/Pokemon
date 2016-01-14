@@ -133,7 +133,6 @@ public class Pokemon {
 		// Displays the Pokemons different attacks
 
 		for(int i = 0; i < attacks.size(); i++) {
-			System.out.println(attacks.size());
 			Text.print("\t\t- ");
 			Text.scrollPrintText("Name of Attack: ", false);
 			Text.print(attacks.get(i).getAttackName()+"\n");
